@@ -1,0 +1,19 @@
+#editor {
+	width: 49%;
+	height: 95%;
+	border: 1px solid black;
+	padding: 5px;
+  overflow: auto;
+  float: left;
+}
+
+#display {
+  width: 49%;
+  height: 95%;
+  float: right;
+  overflow: scroll;
+}
+
+html, body{
+  height: 100%;
+}
