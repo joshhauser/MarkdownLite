@@ -17,8 +17,8 @@ window.onload = () => {
   var filetypeDialog = document.getElementById("filetypeDialog");
   // Button to open filetypeDialog
   var openFiletypeDialog = document.getElementById("openFiletypeDialog");
-  // Button to close filetypeDialog
-  var closeFiletypeDialog = document.getElementById("closeFiletypeDialog");
+  // Cheats sheet
+  var cheatsSheet = document.getElementById("cheats-sheet");
 
   // Focus on "editor" div so that the user can type after page loading
   editor.focus();
@@ -29,9 +29,11 @@ window.onload = () => {
   
   // Displays filetypeDialog
   openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
-  // Removes filetypeDialog
-  closeFiletypeDialog.onclick = () => { filetypeDialog.style.display = "none"; }
 }
 
 // Removes filetypeDialog if the user clicks outside
-window.onclick = (event) => { if (event.target == filetypeDialog) filetypeDialog.style.display = "none"; }
+window.onclick = (event) => {
+  console.log(event.target);
+  if (event.target.id = "filetypeDialog") filetypeDialog.style.display = "none";
+  else if (event.target.id == "cheats-sheet") cheatsSheet.style.display = "none";
+}
