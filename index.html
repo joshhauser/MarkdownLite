@@ -3,11 +3,17 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="style.css">
-    <script src="parser.js"></script>
+    <script src="scripts/parser.js"></script>
+    <script src="scripts/actions.js"></script>
     <title>Markdown Lite</title>
 	</head>
 	<body>
-		<div id="editor" contenteditable="true"></div>
-		<div id="display"></div>
+		<div>
+			<button name="button" onclick="save();">Save</button>
+		</div>
+		<div style="height: 98%; margin-top: 5px;">
+			<div id="editor" contenteditable="true"></div>
+			<div id="display"></div>
+		</div>
 	</body>
 </html>
