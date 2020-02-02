@@ -20,6 +20,8 @@ window.onload = () => {
   // Button to close filetypeDialog
   var closeFiletypeDialog = document.getElementById("closeFiletypeDialog");
 
+  // Focus on "editor" div so that the user can type after page loading
+  editor.focus();
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {
     parse();
