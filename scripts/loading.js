@@ -28,12 +28,12 @@ window.onload = () => {
   });
   
   // Displays filetypeDialog
-  openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
+  openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block";}
+
+  // Removes filetypeDialog if the user clicks outside
+  window.onclick = (event) => {
+    if (event.target.id == "filetypeDialog") filetypeDialog.style.display = "none";
+    else if (event.target.id == "cheats-sheet") cheatsSheet.style.display = "none";   
+  }
 }
 
-// Removes filetypeDialog if the user clicks outside
-window.onclick = (event) => {
-  console.log(event.target);
-  if (event.target.id = "filetypeDialog") filetypeDialog.style.display = "none";
-  else if (event.target.id == "cheats-sheet") cheatsSheet.style.display = "none";
-}
