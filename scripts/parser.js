@@ -1,20 +1,7 @@
-// HTML div used to write some text
-var editor = null;
-// HTML div used to display Markdown content as plain text
-var display = null;
+// editor & display are loaded in loading.js
+
 // List of Markdown tags available in this app
 const markdownTags = ["#", "##", "###", "####"]
-
-// Window loading
-window.onload = () => {
-  editor = document.getElementById("editor");
-  display = document.getElementById("display");
-
-  // At each char input, the script call parse()
-  editor.addEventListener("input", () => {
-    parse();
-  });
-}
 
 /**
  * Parse the edited text to find
