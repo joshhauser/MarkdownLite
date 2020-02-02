@@ -20,8 +20,6 @@ window.onload = () => {
   // Cheats sheet
   var cheatsSheet = document.getElementById("cheats-sheet");
 
-  // Focus on "editor" div so that the user can type after page loading
-  editor.focus();
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {
     parse();
@@ -32,8 +30,14 @@ window.onload = () => {
 
   // Removes filetypeDialog if the user clicks outside
   window.onclick = (event) => {
-    if (event.target.id == "filetypeDialog") filetypeDialog.style.display = "none";
-    else if (event.target.id == "cheats-sheet") cheatsSheet.style.display = "none";   
+    if (event.target.id == "filetypeDialog") {
+      filetypeDialog.style.display = "none";
+      editor.focus();
+    }
+    else if (event.target.id == "cheats-sheet") {
+      cheatsSheet.style.display = "none";
+      editor.focus();
+    }
   }
 }
 

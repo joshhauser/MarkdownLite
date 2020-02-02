@@ -46,5 +46,8 @@ function load() {
 
 function closeDialog(dialogID) {
   let dialog = document.getElementById(dialogID);
-  if (dialog) dialog.style.display = "none";
+  if (dialog) {
+    dialog.style.display = "none";
+    editor.focus();
+  }
 }
