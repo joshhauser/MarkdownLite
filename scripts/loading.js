@@ -39,5 +39,12 @@ window.onload = () => {
       editor.focus();
     }
   }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.code == "Escape"){
+      if (window.getComputedStyle(filetypeDialog).display == "block") filetypeDialog.style.display = "none";
+      if (window.getComputedStyle(cheatsSheet).display == "block") cheatsSheet.style.display = "none";
+    }
+  });
 }
 
