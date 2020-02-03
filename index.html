@@ -43,7 +43,10 @@
 		<div id="filetypeDialog">
 			<div>
 				<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
-				<p>Which format ?</p>
+				<h3>Which format ?</h3>
+				<label for="filename">File name: </label>
+				<input id="filename" type="text">
+				<br>
 				<button id="saveAsHTML" onclick="save('HTML')">HTML</button>
 				<button id="saveAsMD" onclick="save('MD')">Markdown</button>
 			</div>

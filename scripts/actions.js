@@ -3,6 +3,13 @@
  * @param {string} filetype: HTML or MD
  */
 function save(filetype) {
+  // Get filename from text input
+  let filename = document.getElementById("filename").value;
+  if (!filename || filename == "") {
+    alert("Filename can't be empty");
+    return;
+  }
+
   // Remove the dialog
   filetypeDialog.style.display = "none";
   // Get link tag which will be used to open download dialog
@@ -24,11 +31,13 @@ function save(filetype) {
   let file = new Blob([target], {type: contentType});
   // Settings for download link
   save.href = URL.createObjectURL(file);
-  save.download = "memo" + extension;
+  save.download = filename + extension;
   // Open download dialog
   save.click();
   // Reset the download link
   save.href = "#";
+  // Reset the input value
+  document.getElementById("filename").value = "";
 }
 
 /**

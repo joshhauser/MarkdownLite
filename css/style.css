@@ -87,11 +87,16 @@ html, body {
 }
 
 #filetypeDialog div {
+  font-family: "Roboto Regular";
   background-color:white;
   margin: 15% auto;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #888;
   width: 30%;
+}
+
+#filetypeDialog button {
+  margin-top: 3%;
 }
 
 .close-dialog {
