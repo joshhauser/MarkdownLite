@@ -24,6 +24,16 @@
 				</table>
 			</div>
 		</div>
+		<div id="about-this">
+			<div>
+				<span class="close-dialog" onclick="closeDialog('about-this')">&times;</span>
+				<h1>Markdown Lite</h1>
+				<p>Markdown Lite is a very simple WYSIWYG (What You See Is What You Get) editor, using a lightened Markdown syntax.</p>
+				<p>The typed text is converted to HTML in realtime.</p>
+				<p>You can save your text as a Markdown/HTML file.</p>
+				<p>You can load Markdown file, it will be automatically converted to HTML.</p>
+			</div>
+		</div>
 		<!-- Toolbar -->
 		<div>
 			<!-- File opening dialog -->
@@ -32,6 +42,8 @@
 			<input id="load" type="button" value="Load">
 			<!-- Saving button -->
 			<a href="#" id="save"><input id="openFiletypeDialog" type="button" value="Save"></a>
+			<!-- Help button -->
+			<input id="load" type="button" onclick="displayAboutThis();" value="About this">
 		</div>
 		<div style="height: 98%; margin-top: 5px;">
 			<!-- Markdown editor div -->

@@ -19,6 +19,8 @@ window.onload = () => {
   var openFiletypeDialog = document.getElementById("openFiletypeDialog");
   // Cheats sheet
   var cheatsSheet = document.getElementById("cheats-sheet");
+  // About this
+  var aboutThis = document.getElementById("about-this");
 
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {
@@ -38,12 +40,17 @@ window.onload = () => {
       cheatsSheet.style.display = "none";
       editor.focus();
     }
+    else if (event.target.id == "about-this") {
+      aboutThis.style.display = "none";
+      editor.focus();
+    }
   }
 
   window.addEventListener("keydown", (event) => {
     if (event.code == "Escape"){
       if (window.getComputedStyle(filetypeDialog).display == "block") filetypeDialog.style.display = "none";
       if (window.getComputedStyle(cheatsSheet).display == "block") cheatsSheet.style.display = "none";
+      if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
     }
   });
 }

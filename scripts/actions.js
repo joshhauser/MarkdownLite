@@ -60,3 +60,7 @@ function closeDialog(dialogID) {
     editor.focus();
   }
 }
+
+function displayAboutThis() {
+  document.getElementById("about-this").style.display = "block";
+}
