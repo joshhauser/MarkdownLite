@@ -145,6 +145,22 @@ html, body {
 }
 
 @media(max-width: 1000px) {
+  #editor, #display {
+    float: none;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 47%;
+  }
+
+  #editor {
+    margin-bottom: 1%;
+  }
+
+  #display {
+    margin-top: 1%;
+  }
+
   #cheats-sheet div {
     background-color:white;
     margin: 15% auto;
@@ -165,5 +181,9 @@ html, body {
   
   #cheats-sheet table {
     margin-top: 5%;
+  }
+
+  #about-this h1 {
+    margin-top: 13%;
   }
 }
