@@ -9,8 +9,9 @@ function setTextCookie() {
     let expires = "expires=" + date.toUTCString();
     // Replace "\n" in string because they're not interpreted in the cookie
     let text = editor.innerText.replace(/\n/g, "\\n")
+    if (text.substring(text.length - 2) == "\\n") text = text.substring(0, text.length - 2);
     // Cookie
-    document.cookie = "text=" + text.substring(0, text.length  - 2) + "; " + expires + "; " + "path=/";
+    document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
   }
 }
 
