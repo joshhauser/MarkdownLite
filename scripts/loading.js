@@ -26,6 +26,8 @@ window.onload = () => {
   var textCookie = getCookie("text");
   // Cookie "first visit"
   var alreadyVisitedCookie = getCookie("alreadyVisited");
+  // Night mode cookie
+  var nightModeCookie = getCookie("nightMode");
 
   if (textCookie && textCookie != "") {
     editor.innerText = textCookie.replace(/\\n/g, "\n");
@@ -34,6 +36,11 @@ window.onload = () => {
 
   if (alreadyVisitedCookie && alreadyVisitedCookie == "yes") cheatsSheet.style.display = "none";
   else setCookie("alreadyVisited", "yes", 30);
+
+  if (nightModeCookie) {
+    if (nightModeCookie == "yes") setNightMode();
+    else unsetNightMode();
+  }
 
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {

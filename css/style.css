@@ -1,5 +1,6 @@
 html, body {
   height: 100%;
+  margin: 0;
 }
 
 #toolbar {
@@ -18,7 +19,6 @@ html, body {
 #toolbar-buttons {
   margin-top: 0.75%;
   margin-left: 1%;
-  width: 12%;
 }
 
 #container {

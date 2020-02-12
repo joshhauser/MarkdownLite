@@ -105,9 +105,7 @@ function save(filetype) {
   document.getElementById("filename").value = "";
 }
 
-/**
- * Load a file then put its content in editor div
- */
+// Loads a file then put its content in editor div
 function load() {
   // Get the file selected by user through file opening dialog
   let file = document.getElementById("fileLoader").files[0];
@@ -118,6 +116,10 @@ function load() {
   });  
 }
 
+/**
+ * Close a dialog corresponding to the id passed as parameter
+ * @param {string} dialogID : the id of the dialog to close
+ */
 function closeDialog(dialogID) {
   let dialog = document.getElementById(dialogID);
   if (dialog) {
@@ -126,6 +128,31 @@ function closeDialog(dialogID) {
   }
 }
 
+// Display "about this"
 function displayAboutThis() {
   document.getElementById("about-this").style.display = "block";
+}
+
+// Set night mode
+function setNightMode() {
+  let htmlPage = document.getElementsByTagName("html")[0];
+  htmlPage.style.backgroundColor = "#292929";
+  htmlPage.style.color = "white";
+
+  let editor = document.getElementById("editor");
+  editor.style.borderColor = "white";
+
+  setCookie("nightMode", "yes", 30);
+}
+
+// Unset night mode
+function unsetNightMode() {
+  let htmlPage = document.getElementsByTagName("html")[0];
+  htmlPage.style.backgroundColor = "white";
+  htmlPage.style.color = "black";
+
+  let editor = document.getElementById("editor");
+  editor.style.borderColor = "black";
+
+  setCookie("nightMode", "no", 30);
 }
