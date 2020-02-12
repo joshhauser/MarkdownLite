@@ -1,43 +1,5 @@
 // This script loads necessary content for the app
 
-// Set a new text cookie or change an existing cookie
-function setTextCookie() {
-  if (editor.innerText != "") {
-    // Expiration date
-    let date = new Date();
-    date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
-    let expires = "expires=" + date.toUTCString();
-    // Replace "\n" in string because they're not interpreted in the cookie
-    let text = editor.innerText.replace(/\n/g, "\\n")
-    if (text.substring(text.length - 2) == "\\n") text = text.substring(0, text.length - 2);
-    // Cookie
-    document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
-  }
-}
-
-// Return a cookie that has the same name as the one passed as parameter
-function getCookie(cookieName) {
-  // Decoded cookie
-  let decodedCookie = decodeURIComponent(document.cookie);
-  // Splitted cookie
-  let cookie = decodedCookie.split(';');
-
-  for(var i = 0; i < cookie.length; i++) {
-    var str = cookie[i];
-
-    // Extract cookie from string at current index without useless spaces
-    while (str.charAt(0) == " ") str = str.substring(1);
-    // Return the cookie value if the name corresponds to the parameter
-    if (str.indexOf(cookieName + "=") != -1) return str.substring((cookieName + "=").length, str.length);
-  }
-
-  return null;
-}
-
-// Reset the cookie that has the same name as the one passed as parameter
-function resetCookie(cookieName) {
-  if (getCookie(cookieName != null)) document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
 
 window.onload = () => {
   // Add event listener for "load" button
@@ -62,17 +24,22 @@ window.onload = () => {
   var aboutThis = document.getElementById("about-this");
   // Text cookie
   var textCookie = getCookie("text");
+  // Cookie "first visit"
+  var alreadyVisitedCookie = getCookie("alreadyVisited");
 
-  if(textCookie && textCookie != "") {
+  if (textCookie && textCookie != "") {
     editor.innerText = textCookie.replace(/\\n/g, "\n");
     parse();
   }
+
+  if (alreadyVisitedCookie && alreadyVisitedCookie == "yes") cheatsSheet.style.display = "none";
+  else setCookie("alreadyVisited", "yes", 30);
 
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {
     parse();
     // Save text as a cookie at each input (temporary)
-    setTextCookie();
+    setTextCookie(editor);
   });
   
   // Displays filetypeDialog

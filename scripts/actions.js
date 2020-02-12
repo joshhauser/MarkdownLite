@@ -1,4 +1,69 @@
 /**
+ * et a new text cookie or change an existing cookie
+ * @param {HTMLElement} editor 
+ */
+function setTextCookie(editor) {
+  if (editor.innerText != "") {
+    // Expiration date
+    let date = new Date();
+    date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + date.toUTCString();
+    // Replace "\n" in string because they're not interpreted in the cookie
+    let text = editor.innerText.replace(/\n/g, "\\n")
+    if (text.substring(text.length - 2) == "\\n") text = text.substring(0, text.length - 2);
+    // Cookie
+    document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
+  }
+}
+
+/**
+ * Set a new cookie
+ * @param {string} name : cookie name
+ * @param {string} value : cookie value
+ * @param {int} duration : duration (number of days)
+ */
+function setCookie(name, value, duration) {
+  let date = new Date();
+  date.setTime(date.getTime() + duration * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + date.toUTCString();
+  // Replace "\n" in string because they're not interpreted in the cookie
+  document.cookie = name + "=" + value + "; " + expires + "; " + "path=/";
+}
+
+
+/**
+ * Return a cookie that has the same name as the one passed as parameter
+ * @param {string} cookieName : cookie name
+ * @return {string} : cookie value
+ */
+function getCookie(cookieName) {
+  // Decoded cookie
+  let decodedCookie = decodeURIComponent(document.cookie);
+  // Splitted cookie
+  let cookie = decodedCookie.split(';');
+
+  for(var i = 0; i < cookie.length; i++) {
+    var str = cookie[i];
+
+    // Extract cookie from string at current index without useless spaces
+    while (str.charAt(0) == " ") str = str.substring(1);
+    // Return the cookie value if the name corresponds to the parameter
+    if (str.indexOf(cookieName + "=") != -1) return str.substring((cookieName + "=").length, str.length);
+  }
+
+  return null;
+}
+
+/**
+ * Reset the cookie that has the same name as the one passed as parameter
+ * @param {string} cookieName : cookie name
+ */
+function resetCookie(cookieName) {
+  if (getCookie(cookieName != null)) document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+
+/**
  * Make a file with the text then open a download dialog
  * @param {string} filetype: HTML or MD
  */
