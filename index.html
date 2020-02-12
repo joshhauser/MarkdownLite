@@ -38,17 +38,19 @@
 			</div>
 		</div>
 		<!-- Toolbar -->
-		<div>
-			<!-- File opening dialog -->
-			<input id="fileLoader" type="file" accept=".md" hidden>
-			<!-- Loading button -->
-			<input id="load" type="button" value="Load">
-			<!-- Saving button -->
-			<a href="#" id="save"><input id="openFiletypeDialog" type="button" value="Save"></a>
-			<!-- Help button -->
-			<input id="load" type="button" onclick="displayAboutThis();" value="About this">
+		<div id="toolbar">
+			<div id="toolbar-buttons">
+				<!-- File opening dialog -->
+				<input id="fileLoader" type="file" accept=".md" hidden>
+				<!-- Loading button -->
+				<input id="load" type="button" value="Load">
+				<!-- Saving button -->
+				<a href="#" id="save"><input id="openFiletypeDialog" type="button" value="Save"></a>
+				<!-- Help button -->
+				<input id="load" type="button" onclick="displayAboutThis();" value="About this">
+			</div>
 		</div>
-		<div style="height: 98%; margin-top: 5px;">
+		<div id="container">
 			<!-- Markdown editor div -->
 			<div id="editor" contenteditable="true"></div>
 			<!-- Result div -->

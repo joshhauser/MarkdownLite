@@ -2,6 +2,30 @@ html, body {
   height: 100%;
 }
 
+#toolbar {
+  background-color: #4fa2e3;
+  height: 6%;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  box-shadow: 2px 2px 2px #4a73a8;
+  z-index: 1;
+}
+
+#toolbar-buttons {
+  margin-top: 0.75%;
+  margin-left: 1%;
+  width: 12%;
+}
+
+#container {
+  margin-top: 4%;
+  height: 92%;
+}
+
 #editor {
 	width: 49%;
 	height: 95%;
@@ -10,6 +34,7 @@ html, body {
   overflow: auto;
   float: left;
 }
+
 
 #display {
   width: 49%;
