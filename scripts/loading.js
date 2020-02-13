@@ -54,15 +54,13 @@ window.onload = () => {
   }
 
   // Refresh nightmode
-  if (nightmodeCookie) {
-    if (nightmodeCookie == "yes") {
-      setNightmode(true);
-      nightmodeSwitch.checked = true;
-    }
-    else {
-      setNightmode(false);
-      nightmodeSwitch.checked = false;
-    }
+  if (nightmodeCookie && nightmodeCookie == "yes") {
+    setNightmode(true);
+    nightmodeSwitch.checked = true;
+  }
+  else {
+     setNightmode(false);
+     nightmodeSwitch.checked = false;
   }
 
 
