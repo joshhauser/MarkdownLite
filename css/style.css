@@ -93,7 +93,6 @@ input:checked + .slider:before {
   float: left;
 }
 
-
 #display {
   width: 49%;
   height: 95%;

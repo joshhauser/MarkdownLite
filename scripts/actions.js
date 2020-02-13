@@ -14,6 +14,10 @@ function setTextCookie(editor) {
     // Cookie
     document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
   }
+  else {
+    textCookie = getCookie("text");
+    if (textCookie) resetCookie("text");
+  }
 }
 
 /**
@@ -61,7 +65,6 @@ function getCookie(cookieName) {
 function resetCookie(cookieName) {
   if (getCookie(cookieName != null)) document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
-
 
 /**
  * Make a file with the text then open a download dialog
