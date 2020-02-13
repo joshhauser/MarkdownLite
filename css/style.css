@@ -108,16 +108,19 @@ input:checked + .slider:before {
 }
 
 
-#cookies-alert, #cheats-sheet, #about-this {
+#cookies-alert, #cheats-sheet, #about-this, #filetypeDialog{
   display: none;
   position: fixed;
-  z-index: 0;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
+}
+
+#cookies-alert {
+  z-index: 1;
 }
 
 #cookies-alert > div {
@@ -209,17 +212,6 @@ input:checked + .slider:before {
   margin-top: 7%;
 }
 
-#filetypeDialog {
-  display: none;
-  position: fixed;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
 
 #filetypeDialog div {
   font-family: "Roboto Regular";
