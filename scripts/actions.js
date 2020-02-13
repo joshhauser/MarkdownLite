@@ -133,26 +133,33 @@ function displayAboutThis() {
   document.getElementById("about-this").style.display = "block";
 }
 
-// Set night mode
-function setNightMode() {
+/**
+ * Set/unset nightmode based on "active" boolean
+ * @param {boolean} active 
+ */
+function setNightmode(active) {
   let htmlPage = document.getElementsByTagName("html")[0];
-  htmlPage.style.backgroundColor = "#292929";
-  htmlPage.style.color = "white";
-
   let editor = document.getElementById("editor");
-  editor.style.borderColor = "white";
-
-  setCookie("nightMode", "yes", 30);
+  
+  if (active) {
+    htmlPage.style.backgroundColor = "#292929";
+    htmlPage.style.color = "white";
+    editor.style.borderColor = "white";
+    setCookie("nightmode", "yes", 30);
+  }
+  else {
+    htmlPage.style.backgroundColor = "white";
+    htmlPage.style.color = "black";
+    editor.style.borderColor = "black";
+    setCookie("nightmode", "no", 30);
+  }  
 }
 
-// Unset night mode
-function unsetNightMode() {
-  let htmlPage = document.getElementsByTagName("html")[0];
-  htmlPage.style.backgroundColor = "white";
-  htmlPage.style.color = "black";
-
-  let editor = document.getElementById("editor");
-  editor.style.borderColor = "black";
-
-  setCookie("nightMode", "no", 30);
+// Return true if nightmode is active, or else no
+function isNightmodeActive() {
+  nightmodeCookie = getCookie("nightmode");
+  if (nightmodeCookie) {
+    if (nightmodeCookie == "yes") return true;
+    else return false;
+  }
 }

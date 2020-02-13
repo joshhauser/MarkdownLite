@@ -27,7 +27,9 @@ window.onload = () => {
   // Cookie "first visit"
   var alreadyVisitedCookie = getCookie("alreadyVisited");
   // Night mode cookie
-  var nightModeCookie = getCookie("nightMode");
+  var nightmodeCookie = getCookie("nightmode");
+  // Nightmode switch
+  var nightmodeSwitch = document.getElementById("nightmode-switch");
 
   if (textCookie && textCookie != "") {
     editor.innerText = textCookie.replace(/\\n/g, "\n");
@@ -37,9 +39,15 @@ window.onload = () => {
   if (alreadyVisitedCookie && alreadyVisitedCookie == "yes") cheatsSheet.style.display = "none";
   else setCookie("alreadyVisited", "yes", 30);
 
-  if (nightModeCookie) {
-    if (nightModeCookie == "yes") setNightMode();
-    else unsetNightMode();
+  if (nightmodeCookie) {
+    if (nightmodeCookie == "yes") {
+      setNightmode(true);
+      nightmodeSwitch.checked = true;
+    }
+    else {
+      setNightmode(false);
+      nightmodeSwitch.checked = false;
+    }
   }
 
   // At each char input in "editor", the script call parse()
