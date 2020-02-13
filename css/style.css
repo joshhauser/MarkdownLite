@@ -107,7 +107,8 @@ input:checked + .slider:before {
   margin-top: 0;
 }
 
-#cheats-sheet {
+
+#cookies-alert, #cheats-sheet, #about-this {
   display: none;
   position: fixed;
   z-index: 0;
@@ -117,6 +118,41 @@ input:checked + .slider:before {
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
+}
+
+#cookies-alert > div {
+  position: absolute;
+  background-color:white;
+  margin-bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border: 1px solid #888;
+  color: rgb(48, 48, 48);
+}
+
+#cookies-alert-content {
+  margin-left: 5%;
+}
+
+#cookies-alert-buttons {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); 
+  margin-right: 10%;
+}
+
+#cookies-alert-buttons button {
+  cursor: pointer;
+  height: 45px;
+  width: 200px;
+  font-size: 14pt;
+}
+
+#cookies-alert-buttons button:nth-child(2n){
+  margin-top: 5%;
 }
 
 #cheats-sheet div {
@@ -156,18 +192,6 @@ input:checked + .slider:before {
   border: 1px solid rgb(48, 48, 48);
 }
 
-#about-this {
-  display: none;
-  position: fixed;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
 #about-this div {
   background-color:white;
   margin: 15% auto;
@@ -184,7 +208,6 @@ input:checked + .slider:before {
   text-align: center;
   margin-top: 7%;
 }
-
 
 #filetypeDialog {
   display: none;
@@ -300,5 +323,20 @@ input:checked + .slider:before {
 
   #container {
     margin-top: 15%;
+  }
+
+  #cookies-alert-content {
+    margin-top: 4%;
+    margin-left: 2.5%;
+    overflow: hidden;
+  }
+  
+  #cookies-alert-buttons {
+    position: relative;
+    margin-top: 7%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    transform: unset;
   }
 }

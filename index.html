@@ -13,6 +13,27 @@
     <title>Markdown Lite</title>
 	</head>
 	<body>
+		<div id="cookies-alert">
+			<div>
+				<span class="close-dialog" onclick="closeDialog('cookies-alert')">&times;</span>
+				<div id="cookies-alert-content">
+					<h1>Cookies</h1>
+					<p>This website saves cookies for the followings features:
+						<ul>
+							<li>text saving in navigator</li>
+							<li>nightmode</li>
+							<li>cheat sheet display during first visit</li>
+						</ul>
+					</p>
+				</div>
+				<nav id="cookies-alert-buttons">
+					<button onclick="setCookie('acceptCookies', 'yes', 30); closeDialog('cookies-alert')">Accept</button>
+					<br>
+					<span class="clear"></span>
+					<button onclick="setCookie('acceptCookies', 'no', 30); closeDialog('cookies-alert')">Reject</button>
+				</nav>
+			</div>
+		</div>
 		<div id="cheats-sheet">
 			<div>
 				<span class="close-dialog" onclick="closeDialog('cheats-sheet')">&times;</span>

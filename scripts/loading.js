@@ -22,21 +22,22 @@ window.onload = () => {
   var cheatsSheet = document.getElementById("cheats-sheet");
   // About this
   var aboutThis = document.getElementById("about-this");
+  // Nightmode switch
+  var nightmodeSwitch = document.getElementById("nightmode-switch");
+  // Cookies alert banner
+  var cookiesAlertBanner = document.getElementById("cookies-alert");
   // Text cookie
   var textCookie = getCookie("text");
   // Cookie "first visit"
   var alreadyVisitedCookie = getCookie("alreadyVisited");
   // Night mode cookie
   var nightmodeCookie = getCookie("nightmode");
-  // Nightmode switch
-  var nightmodeSwitch = document.getElementById("nightmode-switch");
+  // "Cookies acceptation" cookie
+  var cookiesAcception = getCookie("acceptCookies");
 
-  // Copy textCookie value into editor
-  if (textCookie && textCookie != "") {
-    editor.innerText = textCookie.replace(/\\n/g, "\n");
-    parse();
-  }
-
+  if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
+  else cookiesAlertBanner.style.display = "block"
+  
   // Display cheat sheet for first visit
   if (!alreadyVisitedCookie) {
     cheatsSheet.style.display = "block";
@@ -45,7 +46,13 @@ window.onload = () => {
   else {
     cheatsSheet.style.display = "none";
   }
- 
+
+  // Copy textCookie value into editor
+  if (textCookie && textCookie != "") {
+    editor.innerText = textCookie.replace(/\\n/g, "\n");
+    parse();
+  }
+
   // Refresh nightmode
   if (nightmodeCookie) {
     if (nightmodeCookie == "yes") {
@@ -57,6 +64,7 @@ window.onload = () => {
       nightmodeSwitch.checked = false;
     }
   }
+
 
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {
