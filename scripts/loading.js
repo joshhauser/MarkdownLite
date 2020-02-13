@@ -23,7 +23,7 @@ window.onload = () => {
   // About this
   var aboutThis = document.getElementById("about-this");
   // Nightmode switch
-  var nightmodeSwitch = document.getElementById("nightmode-switch");
+  var nightmodeSwitch = document.getElementById("nightmode-input");
   // Cookies alert banner
   var cookiesAlertBanner = document.getElementById("cookies-alert");
   // Text cookie
@@ -62,7 +62,6 @@ window.onload = () => {
      setNightmode(false);
      nightmodeSwitch.checked = false;
   }
-
 
   // At each char input in "editor", the script call parse()
   editor.addEventListener("input", () => {

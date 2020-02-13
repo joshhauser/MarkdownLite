@@ -3,17 +3,19 @@ html, body {
   margin: 0;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
 #toolbar {
   background-color: #4fa2e3;
-  height: 6%;
-  margin: 0;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  position: fixed;
-  box-shadow: 2px 2px 2px #4a73a8;
+  height: 60px;
   z-index: 1;
+  box-shadow: 2px 2px 2px #4a73a8;
 }
 
 #toolbar-buttons {
@@ -80,8 +82,11 @@ input:checked + .slider:before {
 }
 
 #container {
-  margin-top: 4%;
+  margin-top: 1%;
   height: 92%;
+  width: 99%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
 }
 
 #editor {
