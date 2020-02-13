@@ -31,14 +31,22 @@ window.onload = () => {
   // Nightmode switch
   var nightmodeSwitch = document.getElementById("nightmode-switch");
 
+  // Copy textCookie value into editor
   if (textCookie && textCookie != "") {
     editor.innerText = textCookie.replace(/\\n/g, "\n");
     parse();
   }
 
-  if (alreadyVisitedCookie && alreadyVisitedCookie == "yes") cheatsSheet.style.display = "none";
-  else setCookie("alreadyVisited", "yes", 30);
-
+  // Display cheat sheet for first visit
+  if (!alreadyVisitedCookie) {
+    cheatsSheet.style.display = "block";
+    setCookie("alreadyVisited", "yes", 30);
+  }
+  else {
+    cheatsSheet.style.display = "none";
+  }
+ 
+  // Refresh nightmode
   if (nightmodeCookie) {
     if (nightmodeCookie == "yes") {
       setNightmode(true);

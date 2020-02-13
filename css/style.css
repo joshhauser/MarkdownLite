@@ -108,7 +108,7 @@ input:checked + .slider:before {
 }
 
 #cheats-sheet {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 0;
   left: 0;
@@ -227,6 +227,10 @@ input:checked + .slider:before {
 }
 
 @media(max-width: 1000px) {
+  #toolbar-buttons, #nightmode-switch {
+    margin-top: 1.5%;
+  }
+
   #editor, #display {
     float: none;
     width: 98%;
@@ -268,4 +272,30 @@ input:checked + .slider:before {
   #about-this h1 {
     margin-top: 13%;
   }
+}
+
+@media(max-width: 600px) {
+  #toolbar {
+    height: 8%;
+  }
+
+  #toolbar-buttons {
+    margin-left: 2.5%;
+  }
+
+  #nightmode-switch {
+    margin-right: 2.5%;
+    width: 70px;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(37x);
+    -ms-transform: translateX(37px);
+    transform: translateX(37px);
+  }
+
+  #toolbar-buttons, #nightmode-switch {
+    margin-top: 2.5%;
+  }
+
 }

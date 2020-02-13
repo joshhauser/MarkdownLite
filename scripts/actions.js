@@ -147,6 +147,7 @@ function setNightmode(active) {
   if (active) {
     htmlPage.style.backgroundColor = "#292929";
     htmlPage.style.color = "white";
+    htmlPage.style.transitionDuration = "0.1s";
     editor.style.borderColor = "white";
     setCookie("nightmode", "yes", 30);
   }
