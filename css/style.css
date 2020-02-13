@@ -3,10 +3,6 @@ html, body {
   margin: 0;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-}
 
 #toolbar {
   background-color: #4fa2e3;
