@@ -3,7 +3,6 @@ html, body {
   margin: 0;
 }
 
-
 #toolbar {
   background-color: #4fa2e3;
   top: 0;
@@ -292,7 +291,7 @@ input:checked + .slider:before {
 
 @media(max-width: 600px) {
   #toolbar {
-    height: 8%;
+    height: 60px;
   }
 
   #toolbar-buttons {
