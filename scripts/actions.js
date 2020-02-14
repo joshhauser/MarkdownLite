@@ -1,9 +1,9 @@
 /**
  * et a new text cookie or change an existing cookie
- * @param {HTMLElement} editor 
+ * @param {HTMLElement} editor
  */
 function setTextCookie(editor) {
-  if (editor.innerText != "") {
+  if (getCookie("acceptCookies") == "yes" && editor.innerText != "") {
     // Expiration date
     let date = new Date();
     date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
@@ -27,6 +27,7 @@ function setTextCookie(editor) {
  * @param {int} duration : duration (number of days)
  */
 function setCookie(name, value, duration) {
+  if (getCookie("acceptCookies") == null) return;
   let date = new Date();
   date.setTime(date.getTime() + duration * 24 * 60 * 60 * 1000);
   let expires = "expires=" + date.toUTCString();
@@ -116,7 +117,7 @@ function load() {
   file.text().then(text => {
     editor.innerText = text;
     parse();
-  });  
+  });
 }
 
 /**
@@ -138,12 +139,12 @@ function displayAboutThis() {
 
 /**
  * Set/unset nightmode based on "active" boolean
- * @param {boolean} active 
+ * @param {boolean} active
  */
 function setNightmode(active) {
   let htmlPage = document.getElementsByTagName("html")[0];
   let editor = document.getElementById("editor");
-  
+
   if (active) {
     htmlPage.style.backgroundColor = "#292929";
     htmlPage.style.color = "white";
@@ -156,7 +157,7 @@ function setNightmode(active) {
     htmlPage.style.color = "black";
     editor.style.borderColor = "black";
     setCookie("nightmode", "no", 30);
-  }  
+  }
 }
 
 // Return true if nightmode is active, or else no

@@ -37,7 +37,7 @@ window.onload = () => {
 
   if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
   else cookiesAlertBanner.style.display = "block"
-  
+
   // Display cheat sheet for first visit
   if (!alreadyVisitedCookie) {
     cheatsSheet.style.display = "block";
@@ -69,7 +69,7 @@ window.onload = () => {
     // Save text as a cookie at each input (temporary)
     setTextCookie(editor);
   });
-  
+
   // Displays filetypeDialog
   openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
 
@@ -90,7 +90,7 @@ window.onload = () => {
   }
 
   window.addEventListener("keydown", (event) => {
-    if (event.code == "Escape") {
+    if (event.code == "Escape" && cookiesAlertBanner.style.display == "none") {
       if (window.getComputedStyle(filetypeDialog).display == "block") filetypeDialog.style.display = "none";
       if (window.getComputedStyle(cheatsSheet).display == "block") cheatsSheet.style.display = "none";
       if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
