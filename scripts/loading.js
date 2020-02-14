@@ -35,6 +35,7 @@ window.onload = () => {
   // "Cookies acceptation" cookie
   var cookiesAcception = getCookie("acceptCookies");
 
+
   if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
   else cookiesAlertBanner.style.display = "block"
 
