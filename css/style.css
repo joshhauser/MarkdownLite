@@ -336,4 +336,12 @@ input:checked + .slider:before {
     margin-right: auto;
     transform: unset;
   }
+
+  #about-this div {
+    width: 98%;
+  }
+
+  #container {
+    width: 97%;
+  }
 }
