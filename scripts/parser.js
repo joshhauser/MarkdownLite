@@ -1,7 +1,7 @@
 // editor & display are loaded in loading.js
 
 // List of Markdown tags available in this app
-const markdownTags = ["#", "##", "###", "####"]
+const markdownTags = ["#", "##", "###", "####", "#####", "######", "-"]
 
 /**
  * Parse the edited text to find
@@ -35,11 +35,23 @@ function parse(){
           break;
 
         case "####":
-          newText += "<h4>" + sub + "</h5>";
+          newText += "<h4>" + sub + "</h'>";
+          break;
+
+        case "#####":
+          newText == "<h5>" + sub + "</h5>";
+          break;
+
+        case "######":
+          newText += "<h6>" + sub + "</h6>";
+          break;
+
+        case "-":
+          newText += "&nbsp;".repeat(6) + "-" + sub;
           break;
       }
     }
-    else{
+    else if (line != "\n") {
       newText += line + "<br>";
     }
     //newText += "<br>";
