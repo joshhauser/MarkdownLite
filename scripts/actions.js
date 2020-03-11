@@ -69,7 +69,7 @@ function resetCookie(cookieName) {
 
 /**
  * Make a file with the text then open a download dialog
- * @param {string} filetype: HTML or MD
+ * @param {string} filetype: HTML/MD/txt
  */
 function save(filetype) {
   // Get filename from text input
@@ -90,10 +90,15 @@ function save(filetype) {
     extension = ".html";
     target = display.innerHTML;
   }
-  else {
+  else if(filetype == "MD") {
     contentType = "text/plain";
     extension = ".md";
     target = editor.innerText;
+  }
+  else {
+    contentType = "text/plain";
+    extension = ".txt";
+    target = removeMdTags(editor.innerText);
   }
 
   // File creation
@@ -167,4 +172,13 @@ function isNightmodeActive() {
     if (nightmodeCookie == "yes") return true;
     else return false;
   }
+}
+
+function removeMdTags(mdText) {
+  mdText.replace(/# /g, "");
+  mdText.replace(/## /g, "");
+  mdText.replace(/### /g, "");
+  mdText.replace(/#### /g, "");
+  mdText.replace(/##### /g, "");
+  mdText.replace(/###### /g, "");
 }
