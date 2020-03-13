@@ -181,4 +181,6 @@ function removeMdTags(mdText) {
   mdText.replace(/#### /g, "");
   mdText.replace(/##### /g, "");
   mdText.replace(/###### /g, "");
+
+  return mdText;
 }
