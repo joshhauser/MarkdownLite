@@ -16,7 +16,7 @@ function parse(){
     let sub;
     let lineContent = line.split(" ");
     let markdownTag = lineContent[0];
-    
+
     if (markdownTags.includes(markdownTag)) {
       lineContent.shift();
       sub = lineContent.join(" ");
@@ -25,7 +25,7 @@ function parse(){
         case "#":
           newText += "<h1>" + sub + "</h2>";
           break;
-        
+
         case "##":
           newText += "<h2>" + sub + "</h2>";
           break;
@@ -47,7 +47,7 @@ function parse(){
           break;
 
         case "-":
-          newText += "&nbsp;".repeat(6) + "-" + sub;
+          newText += "&nbsp;".repeat(6) + "-" + "&nbsp;".repeat(3) + sub + "<br>"
           break;
       }
     }
@@ -62,7 +62,7 @@ function parse(){
 
 /**
  * Copy the HTML text as plain text
- * @param {string} text 
+ * @param {string} text
  */
 function copyAsPlainText(text){
   display.innerHTML = text;
