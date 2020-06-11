@@ -144,18 +144,26 @@ function displayAboutThis() {
 function setNightmode(active) {
   let htmlPage = document.getElementsByTagName("html")[0];
   let editor = document.getElementById("editor");
+  let displayer = document.getElementById("display");
 
   if (active) {
     htmlPage.style.backgroundColor = "#292929";
-    htmlPage.style.color = "white";
+    
     htmlPage.style.transitionDuration = "0.1s";
+    
     editor.style.borderColor = "white";
+    editor.style.color = "white";
+    displayer.style.color = "white";
+
     setCookie("nightmode", "yes", 30);
   }
   else {
     htmlPage.style.backgroundColor = "white";
-    htmlPage.style.color = "black";
+
     editor.style.borderColor = "black";
+    editor.style.color = "black";
+    displayer.style.color = "black";
+
     setCookie("nightmode", "no", 30);
   }
 }

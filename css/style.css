@@ -246,7 +246,9 @@ input:checked + .slider:before {
     margin-top: 10%;
   }
 }
-@media(max-width: 1000px) {
+
+
+@media(max-width: 1200px) {
   #toolbar-buttons, #nightmode-switch {
     margin-top: 1.5%;
   }
@@ -293,6 +295,7 @@ input:checked + .slider:before {
     margin-top: 13%;
   }
 }
+
 
 @media(max-width: 600px) {
   #toolbar {
