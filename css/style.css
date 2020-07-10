@@ -89,7 +89,7 @@ input:checked + .slider:before {
 	height: 95%;
 	border: 1px solid black;
 	padding: 5px;
-  overflow: auto;
+  overflow: scroll;
   float: left;
 }
 
