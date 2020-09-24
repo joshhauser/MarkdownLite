@@ -1,2 +1,2 @@
 # MarkdownLite
-Very simple Markdown WYSIWYG
+Very simple Markdown WYSIWYG.
