@@ -1,6 +1,9 @@
 html, body {
   height: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 #toolbar {
@@ -8,14 +11,20 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 6%;
   z-index: 1;
   box-shadow: 2px 2px 2px #4a73a8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #toolbar-buttons {
+  display: flex;
   float: left;
   margin-left: 1%;
+  align-items: center;
+  gap: 5px;
 }
 
 #nightmode-switch {
@@ -24,10 +33,6 @@ html, body {
   width: 90px;
   height: 30px;
   margin-right: 1%;
-}
-
-#toolbar-buttons, #nightmode-switch {
-  margin-top: 0.75%;
 }
 
 #nightmode-switch input {
@@ -63,11 +68,11 @@ html, body {
 }
 
 input:checked + .slider {
-  background-color: #e75757;
+  background-color: #3c9c61;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #e75757;
+  box-shadow: 0 0 1px #3c9c61;
 }
 
 input:checked + .slider:before {
@@ -76,33 +81,29 @@ input:checked + .slider:before {
   transform: translateX(57px);
 }
 
-#container {
+.wysiwyg-container {
   margin-top: 1%;
-  height: 92%;
   width: 99%;
   margin-left: 0.5%;
   margin-right: 0.5%;
+  display: flex;
 }
 
-#editor {
+.wysiwyg-editor {
 	width: 49%;
-	height: 95%;
 	border: 1px solid black;
 	padding: 5px;
   overflow: scroll;
-  float: left;
 }
 
-#display {
+.wysiwyg-display {
   width: 49%;
-  height: 95%;
   padding: 5px;
-  float: right;
   overflow: scroll;
   font-family: "Roboto Regular";
 }
 
-#display h1, #display h2, #display h3, #display h4 {
+.wysiwyg-display h1, .wysiwyg-display h2, .wysiwyg-display h3, .wysiwyg-display h4 {
   font-family: "Roboto Bold";
   margin-top: 0;
 }
@@ -249,23 +250,18 @@ input:checked + .slider:before {
 
 
 @media(max-width: 1200px) {
-  #toolbar-buttons, #nightmode-switch {
-    margin-top: 1.5%;
-  }
-
-  #editor, #display {
+  .wysiwyg-editor, .wysiwyg-display {
     float: none;
     width: 98%;
     margin-left: auto;
     margin-right: auto;
-    height: 47%;
   }
 
-  #editor {
+  .wysiwyg-editor {
     margin-bottom: 1%;
   }
 
-  #display {
+  .wysiwyg-display {
     margin-top: 1%;
   }
 
@@ -321,7 +317,7 @@ input:checked + .slider:before {
     margin-top: 2.5%;
   }
 
-  #container {
+  .wysiwyg-container {
     margin-top: 15%;
   }
 
@@ -344,7 +340,7 @@ input:checked + .slider:before {
     width: 98%;
   }
 
-  #container {
+  .wysiwyg-container {
     width: 97%;
   }
 }

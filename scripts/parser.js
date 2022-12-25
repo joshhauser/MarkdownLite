@@ -8,8 +8,8 @@ const markdownTags = ["#", "##", "###", "####", "#####", "######", "-"]
  * Markdown tags and replace them with
  * HTML tags
  */
-function parse(){
-  let lines = editor.innerText.split("\n");
+function parse(text){
+  let lines = text.split("\n");
   let newText = "";
 
   lines.forEach(line => {
@@ -64,6 +64,7 @@ function parse(){
  * Copy the HTML text as plain text
  * @param {string} text
  */
-function copyAsPlainText(text){
-  display.innerHTML = text;
+function copyAsPlainText(text) {
+  let activeDisplay = document.getElementsByClassName("activeTabView")[0].getElementsByClassName("wysiwyg-display")[0];
+  activeDisplay.innerHTML = text;
 }

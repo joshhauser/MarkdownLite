@@ -10,30 +10,28 @@ window.onload = () => {
     document.getElementById("fileLoader").onchange = load;
   });
 
-  // "editor" div
-  var editor = document.getElementById("editor");
+  // "editors" div
+  let defaultEditor = document.getElementsByClassName("wysiwyg-editor")[0];
   // "display" div
-  var display = document.getElementById("display");
+  let displays = document.getElementsByClassName("wysiwyg-display");
   // Dialog used to choose file type for saving
-  var filetypeDialog = document.getElementById("filetypeDialog");
+  let filetypeDialog = document.getElementById("filetypeDialog");
   // Button to open filetypeDialog
-  var openFiletypeDialog = document.getElementById("openFiletypeDialog");
+  let openFiletypeDialog = document.getElementById("openFiletypeDialog");
   // Cheats sheet
-  var cheatsSheet = document.getElementById("cheats-sheet");
+  let cheatsSheet = document.getElementById("cheats-sheet");
   // About this
-  var aboutThis = document.getElementById("about-this");
+  let aboutThis = document.getElementById("about-this");
   // Nightmode switch
-  var nightmodeSwitch = document.getElementById("nightmode-input");
+  let nightmodeSwitch = document.getElementById("nightmode-input");
   // Cookies alert banner
-  var cookiesAlertBanner = document.getElementById("cookies-alert");
-  // Text cookie
-  var textCookie = getCookie("text");
+  let cookiesAlertBanner = document.getElementById("cookies-alert");
   // Cookie "first visit"
-  var alreadyVisitedCookie = getCookie("alreadyVisited");
+  let alreadyVisitedCookie = getCookie("alreadyVisited");
   // Night mode cookie
-  var nightmodeCookie = getCookie("nightmode");
+  let nightmodeCookie = getCookie("nightmode");
   // "Cookies acceptation" cookie
-  var cookiesAcception = getCookie("acceptCookies");
+  let cookiesAcception = getCookie("acceptCookies");
 
 
   if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
@@ -48,11 +46,21 @@ window.onload = () => {
     cheatsSheet.style.display = "none";
   }
 
-  // Copy textCookie value into editor
-  if (textCookie && textCookie != "") {
-    editor.innerText = textCookie.replace(/\\n/g, "\n");
-    parse();
+  let texts = getTexts();
+  if (texts != null) {
+    if (texts.length >= 1) {
+      defaultEditor.innerText = texts[0];
+    }
+    
+    if (texts.length > 1) {
+      for (let i = 1; i < texts.length; i++) {
+        let newEditor = addTab();
+        newEditor.innerText = texts[i];
+      }
+    }
   }
+
+
 
   // Refresh nightmode
   if (nightmodeCookie && nightmodeCookie == "yes") {
@@ -60,15 +68,17 @@ window.onload = () => {
     nightmodeSwitch.checked = true;
   }
   else {
-     setNightmode(false);
-     nightmodeSwitch.checked = false;
+    setNightmode(false);
+    nightmodeSwitch.checked = false;
   }
 
   // At each char input in "editor", the script call parse()
-  editor.addEventListener("input", () => {
-    parse();
+  let timeout = null;
+  defaultEditor.addEventListener("input", () => {
+    parse(defaultEditor.innerText);
     // Save text as a cookie at each input (temporary)
-    setTextCookie(editor);
+
+    let timeout = setTimeout(() => setTextCookie(defaultEditor, 1), 3000)
   });
 
   // Displays filetypeDialog
@@ -78,15 +88,18 @@ window.onload = () => {
   window.onclick = (event) => {
     if (event.target.id == "filetypeDialog") {
       filetypeDialog.style.display = "none";
-      editor.focus();
+      let currentEditor = getCurrentEditor();
+      if (currentEditor) currentEditor.focus()
     }
     else if (event.target.id == "cheats-sheet") {
       cheatsSheet.style.display = "none";
-      editor.focus();
+      let currentEditor = getCurrentEditor();
+      if (currentEditor) currentEditor.focus()
     }
     else if (event.target.id == "about-this") {
       aboutThis.style.display = "none";
-      editor.focus();
+      let currentEditor = getCurrentEditor();
+      if (currentEditor) currentEditor.focus()
     }
   }
 
@@ -97,4 +110,22 @@ window.onload = () => {
       if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
     }
   });
+}
+
+function getCurrentEditor() {
+  let activeTabView = document.getElementsByClassName("activeTabView");
+  let currentEditor = activeTabView[0].getElementsByClassName("wysiwyg-editor");
+
+  return currentEditor[0] || null;
+}
+
+function getTexts() {
+  let textsCookies = getTextsCookies();
+  if (textsCookies.length > 0) {
+    let texts = [];
+    textsCookies.forEach(cookie => texts.push(cookie.split('=')[1]));
+    return texts;
+  }
+
+  return null;
 }

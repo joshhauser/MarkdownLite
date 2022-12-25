@@ -6,10 +6,12 @@
     <meta name="description" content="Editeur Markdown">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/tabs.css">
 		<link rel="stylesheet" href="css/style.css">
 		<script src="scripts/loading.js"></script>
     <script src="scripts/parser.js"></script>
     <script src="scripts/actions.js"></script>
+		<script src="scripts/tabs.js"></script>
     <title>Markdown Lite</title>
 	</head>
 	<body>
@@ -74,23 +76,33 @@
 				<span class="slider"></span>
 			</label>
 		</div>
-		<div id="container">
-			<!-- Markdown editor div -->
-			<div id="editor" contenteditable="true"></div>
-			<!-- Result div -->
-			<div id="display"></div>
+		<div class="tab">
+			<button class="tablink activeTab" onclick="setTab(event.target.innerText)" oncontextmenu="event.preventDefault();" onmousedown="if (event.button == 2) deleteTab(event.target.innerText)">1</button>
+			<!-- <button class="tablink activeTab" onclick="setTab(event.target.innerText)">1</button> -->
+			<button id="new-tab-btn" onclick="addTab()">+</button>
 		</div>
-		<!-- Dialog to choose format for the file to be saved -->
-		<div id="filetypeDialog">
-			<div>
-				<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
-				<h3>Which format ?</h3>
-				<label for="filename">File name: </label>
-				<input id="filename" type="text">
-				<br>
-				<button id="saveAsHTML" onclick="save('HTML')">HTML</button>
-				<button id="saveAsMD" onclick="save('MD')">Markdown</button>
-				<button id="saveAsTXT" onclick="save('TXT')">TXT</button>
+		<!-- Tab content -->
+		<div id="tabViews">
+			<div id="tab-1" class="tabContent activeTabView">
+				<div class="wysiwyg-container">
+					<!-- Markdown editor div -->
+					<div class="wysiwyg-editor" contenteditable="true"></div>
+					<!-- Result div -->
+					<div class="wysiwyg-display"></div>
+				</div>
+				<!-- Dialog to choose format for the file to be saved -->
+				<div id="filetypeDialog">
+					<div>
+						<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
+						<h3>Which format ?</h3>
+						<label for="filename">File name: </label>
+						<input id="filename" type="text">
+						<br>
+						<button id="saveAsHTML" onclick="save('HTML')">HTML</button>
+						<button id="saveAsMD" onclick="save('MD')">Markdown</button>
+						<button id="saveAsTXT" onclick="save('TXT')">TXT</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

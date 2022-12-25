@@ -1,22 +1,20 @@
 /**
- * et a new text cookie or change an existing cookie
- * @param {HTMLElement} editor
+ * 
+ * @param {*} editor 
+ * @param {*} editorId 
  */
-function setTextCookie(editor) {
+function setTextCookie(editor, editorId) {
   if (getCookie("acceptCookies") == "yes" && editor.innerText != "") {
-    // Expiration date
     let date = new Date();
     date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
-    let expires = "expires=" + date.toUTCString();
-    // Replace "\n" in string because they're not interpreted in the cookie
-    let text = editor.innerText.replace(/\n/g, "\\n")
+    let expires = `expires=${date.toUTCString()}`;
+    let text = editor.innerText.replace(/\n/g, "\\n");
     if (text.substring(text.length - 2) == "\\n") text = text.substring(0, text.length - 2);
-    // Cookie
-    document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
+    document.cookie = `editor-${editorId}=${text}; ${expires}; path=/`;
   }
   else {
-    textCookie = getCookie("text");
-    if (textCookie) resetCookie("text");
+    textCookie = getCookie(`editor-${editorId}`);
+    if (textCookie) resetCookie(`editor-${editorId}`);
   }
 }
 
@@ -45,10 +43,10 @@ function getCookie(cookieName) {
   // Decoded cookie
   let decodedCookie = decodeURIComponent(document.cookie);
   // Splitted cookie
-  let cookie = decodedCookie.split(';');
+  let cookie = decodedCookie.split('; ');
 
-  for(var i = 0; i < cookie.length; i++) {
-    var str = cookie[i];
+  for(let i = 0; i < cookie.length; i++) {
+    let str = cookie[i];
 
     // Extract cookie from string at current index without useless spaces
     while (str.charAt(0) == " ") str = str.substring(1);
@@ -57,6 +55,15 @@ function getCookie(cookieName) {
   }
 
   return null;
+}
+
+function getTextsCookies() {
+  let decodedCookies = decodeURIComponent(document.cookie);
+  let cookies = decodedCookies.split('; ');
+  console.log(cookies)
+  let textCookies = cookies.filter((elt) => elt.match(/editor-[1-9]+=.*/g));
+
+  return textCookies;
 }
 
 /**
@@ -149,26 +156,29 @@ function displayAboutThis() {
 function setNightmode(active) {
   let htmlPage = document.getElementsByTagName("html")[0];
   let editor = document.getElementById("editor");
-  let displayer = document.getElementById("display");
+  let editors = document.getElementsByClassName("editor");
+  let displayer = document.getElementsByClassName("wysiwyg-display")[0];
 
   if (active) {
     htmlPage.style.backgroundColor = "#292929";
     
     htmlPage.style.transitionDuration = "0.1s";
     
-    editor.style.borderColor = "white";
-    editor.style.color = "white";
+    for (let editor of editors) {
+      editor.style.borderColor = "white";
+      editor.style.color = "white";
+    }
     displayer.style.color = "white";
-
     setCookie("nightmode", "yes", 30);
   }
   else {
     htmlPage.style.backgroundColor = "white";
 
-    editor.style.borderColor = "black";
-    editor.style.color = "black";
+    for (let editor of editors) {
+      editor.style.borderColor = "black";
+      editor.style.color = "black";
+    }
     displayer.style.color = "black";
-
     setCookie("nightmode", "no", 30);
   }
 }
