@@ -65,11 +65,11 @@
 				<!-- File opening dialog -->
 				<input id="fileLoader" type="file" accept=".md" hidden>
 				<!-- Loading button -->
-				<input id="load" type="button" value="Load">
+				<input id="load" class="toolbar-button" type="button" value="Load">
 				<!-- Saving button -->
-				<a href="#" id="save"><input id="openFiletypeDialog" type="button" value="Save"></a>
+				<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="toolbar-button" 	type="button" value="Save"></a>
 				<!-- Help button -->
-				<input id="load" type="button" onclick="displayAboutThis();" value="About this">
+				<input id="load" class="toolbar-button" type="button" onclick="displayAboutThis();" value="About this">
 			</div>
 			<label id="nightmode-switch">
 				<input id="nightmode-input" onclick="setNightmode(!isNightmodeActive())" type="checkbox">
