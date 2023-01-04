@@ -19,7 +19,7 @@ html, body {
   align-items: center;
 }
 
-#toolbar-buttons {
+#neumorphic-buttons {
   display: flex;
   float: left;
   margin-left: 1%;
@@ -28,7 +28,7 @@ html, body {
   gap: 10px;
 }
 
-.toolbar-button {
+.neumorphic-button {
   border-radius: 10px;
   height: 100%;
   border: none;
@@ -42,7 +42,7 @@ html, body {
   cursor: pointer;
 }
 
-.toolbar-button:active {
+.neumorphic-button:active {
   box-shadow: 
   inset 6px 6px 12px 0 rgba(0, 0, 0, 0.15),
   inset -4px -4px 12px 0 rgba(255, 255, 255, 0.15);
@@ -89,6 +89,15 @@ html, body {
   background: linear-gradient(145deg, #f83f3f, #d13535);
   box-shadow:  20px 20px 60px #c53232, -20px -20px 60px #ff4444;
   transition: .4s;
+} 
+
+.dialog-content {
+  background-color: #4fa2e3;
+  color: white;
+  border-radius: 25px;
+  box-shadow: 
+  inset 6px 6px 12px 0 rgba(0, 0, 0, 0.15),
+  inset -4px -4px 12px 0 rgba(255, 255, 255, 0.15);
 }
 
 .wysiwyg-container {
@@ -170,7 +179,6 @@ html, body {
 }
 
 #cheats-sheet div {
-  background-color:white;
   margin: 15% auto;
   padding: 10px;
   padding-bottom: 20px;
@@ -207,7 +215,6 @@ html, body {
 }
 
 #about-this div {
-  background-color:white;
   margin: 15% auto;
   padding: 15px;
   padding-bottom: 20px;
@@ -226,7 +233,6 @@ html, body {
 
 #filetypeDialog div {
   font-family: "Roboto Regular";
-  background-color:white;
   margin: 15% auto;
   padding: 15px;
   border: 1px solid #888;
@@ -308,7 +314,7 @@ html, body {
     height: 60px;
   }
 
-  #toolbar-buttons {
+  #neumorphic-buttons {
     margin-left: 2.5%;
   }
 
@@ -323,7 +329,7 @@ html, body {
     transform: translateX(37px);
   }
 
-  #toolbar-buttons, #nightmode-switch {
+  #neumorphic-buttons, #nightmode-switch {
     margin-top: 2.5%;
   }
 

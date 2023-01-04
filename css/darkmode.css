@@ -1,7 +1,7 @@
 .darkmode {
 }
 
-.darkmode #toolbar-buttons {
+.darkmode #neumorphic-buttons {
 }
 
 .darkmode #toolbar {
@@ -9,7 +9,7 @@
   box-shadow: 2px 2px 2px #1a3a63;
 }
 
-.darkmode .toolbar-button {
+.darkmode .neumorphic-button {
   background-color: #265981;
   box-shadow: 
     6px 6px 12px 0 rgba(0, 0, 0, 0.15),

@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="css/darkmode.css">
 		<link rel="stylesheet" href="css/fonts.css">
 		<link rel="stylesheet" href="css/tabs.css">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/lightmode.css">
 		<script src="scripts/loading.js"></script>
     <script src="scripts/parser.js"></script>
     <script src="scripts/actions.js"></script>
@@ -36,8 +36,8 @@
 				</nav>
 			</div>
 		</div>
-		<div id="cheats-sheet">
-			<div>
+		<div id="cheats-sheet" class="dialog">
+			<div class="dialog-content">
 				<span class="close-dialog" onclick="closeDialog('cheats-sheet')">&times;</span>
 				<h1>Markdown cheats sheet</h1>
 				<h2>Markdown tags and HTML equivalent</h2>
@@ -50,8 +50,8 @@
 				</table>
 			</div>
 		</div>
-		<div id="about-this">
-			<div>
+		<div id="about-this" class="dialog">
+			<div class="dialog-content">
 				<span class="close-dialog" onclick="closeDialog('about-this')">&times;</span>
 				<h1>Markdown Lite</h1>
 				<p>Markdown Lite is a very simple WYSIWYG (What You See Is What You Get) editor, using a lightened Markdown syntax.</p>
@@ -62,15 +62,15 @@
 		</div>
 		<!-- Toolbar -->
 		<div id="toolbar">
-			<div id="toolbar-buttons">
+			<div id="neumorphic-buttons">
 				<!-- File opening dialog -->
 				<input id="fileLoader" type="file" accept=".md" hidden>
 				<!-- Loading button -->
-				<input id="load" class="toolbar-button" type="button" value="Load">
+				<input id="load" class="neumorphic-button" type="button" value="Load">
 				<!-- Saving button -->
-				<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="toolbar-button" 	type="button" value="Save"></a>
+				<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="neumorphic-button" 	type="button" value="Save"></a>
 				<!-- Help button -->
-				<input id="load" class="toolbar-button" type="button" onclick="displayAboutThis();" value="About this">
+				<input id="load" class="neumorphic-button" type="button" onclick="displayAboutThis();" value="About this">
 			</div>
 			<label id="nightmode-switch">
 				<input id="nightmode-input" onclick="setNightmode(event.target.checked)" type="checkbox">
@@ -92,16 +92,16 @@
 					<div class="wysiwyg-display"></div>
 				</div>
 				<!-- Dialog to choose format for the file to be saved -->
-				<div id="filetypeDialog">
-					<div>
+				<div id="filetypeDialog" class="dialog">
+					<div class="dialog-content">
 						<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
 						<h3>Which format ?</h3>
 						<label for="filename">File name: </label>
 						<input id="filename" type="text">
 						<br>
-						<button id="saveAsHTML" onclick="save('HTML')">HTML</button>
-						<button id="saveAsMD" onclick="save('MD')">Markdown</button>
-						<button id="saveAsTXT" onclick="save('TXT')">TXT</button>
+						<button class="neumorphic-button" id="saveAsHTML" onclick="save('HTML')">HTML</button>
+						<button class="neumorphic-button" id="saveAsMD" onclick="save('MD')">Markdown</button>
+						<button class="neumorphic-button" id="saveAsTXT" onclick="save('TXT')">TXT</button>
 					</div>
 				</div>
 			</div>
