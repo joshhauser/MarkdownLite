@@ -60,8 +60,6 @@ window.onload = () => {
     }
   }
 
-
-
   // Refresh nightmode
   if (nightmodeCookie && nightmodeCookie == "yes") {
     setNightmode(true);

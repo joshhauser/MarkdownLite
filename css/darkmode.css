@@ -1,0 +1,31 @@
+.darkmode {
+}
+
+.darkmode #toolbar-buttons {
+}
+
+.darkmode #toolbar {
+  background-color: #265981;
+  box-shadow: 2px 2px 2px #1a3a63;
+}
+
+.darkmode .toolbar-button {
+  background-color: #265981;
+  box-shadow: 
+    6px 6px 12px 0 rgba(0, 0, 0, 0.15),
+    -4px -4px 12px 0 rgba(255, 255, 255, 0.15);
+}
+
+.darkmode .slider {
+  background: #265981;
+  box-shadow: inset -7px -7px 11px rgba(172, 217, 252, 0.179), inset 7px 7px 17px rgba(14, 57, 90, 0.57);
+}
+
+.darkmode input:checked + .slider:before {
+  -webkit-transform: translateX(57x);
+  -ms-transform: translateX(57px);
+  transform: translateX(57px);
+  border-radius: 50px;
+  background: linear-gradient(145deg, #77d17a, #64b067);
+  box-shadow:  20px 20px 60px #5ea661, -20px -20px 60px #80e083;
+}

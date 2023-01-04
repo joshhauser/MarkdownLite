@@ -5,6 +5,7 @@
     <meta name="author" content='Joshua Hauser'>
     <meta name="description" content="Editeur Markdown">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/darkmode.css">
 		<link rel="stylesheet" href="css/fonts.css">
 		<link rel="stylesheet" href="css/tabs.css">
 		<link rel="stylesheet" href="css/style.css">
@@ -72,7 +73,7 @@
 				<input id="load" class="toolbar-button" type="button" onclick="displayAboutThis();" value="About this">
 			</div>
 			<label id="nightmode-switch">
-				<input id="nightmode-input" onclick="setNightmode(!isNightmodeActive())" type="checkbox">
+				<input id="nightmode-input" onclick="setNightmode(event.target.checked)" type="checkbox">
 				<span class="slider"></span>
 			</label>
 		</div>

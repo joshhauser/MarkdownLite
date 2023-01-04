@@ -91,16 +91,6 @@ html, body {
   transition: .4s;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(57x);
-  -ms-transform: translateX(57px);
-  transform: translateX(57px);
-  border-radius: 50px;
-  background: linear-gradient(145deg, #66a668, #568c57);
-  box-shadow:  20px 20px 60px #518452,
-              -20px -20px 60px #6db270;
-}
-
 .wysiwyg-container {
   margin-top: 1%;
   width: 99%;

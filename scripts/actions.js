@@ -154,6 +154,12 @@ function displayAboutThis() {
  * @param {boolean} active
  */
 function setNightmode(active) {
+  console.log(active)
+  let htmlPage = document.getElementsByTagName("html")[0];
+  if (active) htmlPage.classList.add("darkmode");
+  else htmlPage.classList.remove("darkmode");
+
+  /*
   let htmlPage = document.getElementsByTagName("html")[0];
   let editor = document.getElementById("editor");
   let editors = document.getElementsByClassName("editor");
@@ -181,6 +187,7 @@ function setNightmode(active) {
     displayer.style.color = "black";
     setCookie("nightmode", "no", 30);
   }
+  */
 }
 
 // Return true if nightmode is active, or else no
