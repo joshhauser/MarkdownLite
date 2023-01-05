@@ -1,22 +1,22 @@
 // editor & display are loaded in loading.js
 
 // List of Markdown tags available in this app
-const markdownTags = ["#", "##", "###", "####"]
+const markdownTags = ["#", "##", "###", "####", "#####", "######", "-"]
 
 /**
  * Parse the edited text to find
  * Markdown tags and replace them with
  * HTML tags
  */
-function parse(){
-  let lines = editor.innerText.split("\n");
+function parse(text){
+  let lines = text.split("\n");
   let newText = "";
 
   lines.forEach(line => {
     let sub;
     let lineContent = line.split(" ");
     let markdownTag = lineContent[0];
-    
+
     if (markdownTags.includes(markdownTag)) {
       lineContent.shift();
       sub = lineContent.join(" ");
@@ -25,7 +25,7 @@ function parse(){
         case "#":
           newText += "<h1>" + sub + "</h2>";
           break;
-        
+
         case "##":
           newText += "<h2>" + sub + "</h2>";
           break;
@@ -35,11 +35,23 @@ function parse(){
           break;
 
         case "####":
-          newText += "<h4>" + sub + "</h5>";
+          newText += "<h4>" + sub + "</h'>";
+          break;
+
+        case "#####":
+          newText == "<h5>" + sub + "</h5>";
+          break;
+
+        case "######":
+          newText += "<h6>" + sub + "</h6>";
+          break;
+
+        case "-":
+          newText += "&nbsp;".repeat(6) + "-" + "&nbsp;".repeat(3) + sub + "<br>"
           break;
       }
     }
-    else{
+    else if (line != "\n") {
       newText += line + "<br>";
     }
     //newText += "<br>";
@@ -50,8 +62,9 @@ function parse(){
 
 /**
  * Copy the HTML text as plain text
- * @param {string} text 
+ * @param {string} text
  */
-function copyAsPlainText(text){
-  display.innerHTML = text;
+function copyAsPlainText(text) {
+  let activeDisplay = document.getElementsByClassName("activeTabView")[0].getElementsByClassName("wysiwyg-display")[0];
+  activeDisplay.innerHTML = text;
 }

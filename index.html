@@ -5,15 +5,18 @@
     <meta name="author" content='Joshua Hauser'>
     <meta name="description" content="Editeur Markdown">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/darkmode.css">
 		<link rel="stylesheet" href="css/fonts.css">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/tabs.css">
+		<link rel="stylesheet" href="css/lightmode.css">
 		<script src="scripts/loading.js"></script>
     <script src="scripts/parser.js"></script>
     <script src="scripts/actions.js"></script>
+		<script src="scripts/tabs.js"></script>
     <title>Markdown Lite</title>
 	</head>
 	<body>
-		<div id="cheats-sheet">
+		<div id="cookies-alert">
 			<div>
 				<div id="cookies-alert-content">
 					<h1>Cookies</h1>
@@ -69,22 +72,25 @@
 		</div>
 		<!-- Toolbar -->
 		<div id="toolbar">
-			<div id="toolbar-buttons">
+			<div id="neumorphic-buttons">
 				<!-- File opening dialog -->
 				<input id="fileLoader" type="file" accept=".md" hidden>
 				<!-- Loading button -->
-				<input id="load" type="button" value="Load">
+				<input id="load" class="neumorphic-button" type="button" value="Load">
 				<!-- Saving button -->
-				<a href="#" id="save"><input id="openFiletypeDialog" type="button" value="Save"></a>
+				<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="neumorphic-button" 	type="button" value="Save"></a>
 				<!-- Help button -->
-				<input id="load" type="button" onclick="displayAboutThis();" value="About this">
+				<input id="load" class="neumorphic-button" type="button" onclick="displayAboutThis();" value="About this">
 			</div>
+			<label id="nightmode-switch">
+				<input id="nightmode-input" onclick="setNightmode(event.target.checked)" type="checkbox">
+				<span class="slider"></span>
+			</label>
 		</div>
-		<div id="container">
-			<!-- Markdown editor div -->
-			<div id="editor" contenteditable="true"></div>
-			<!-- Result div -->
-			<div id="display"></div>
+		<div class="tab">
+			<button class="tablink activeTab" onclick="setTab(event.target.innerText)" oncontextmenu="event.preventDefault();" onmousedown="if (event.button == 2) deleteTab(event.target.innerText)">1</button>
+			<!-- <button class="tablink activeTab" onclick="setTab(event.target.innerText)">1</button> -->
+			<button id="new-tab-btn" onclick="addTab()">+</button>
 		</div>
 		<!-- Tab content -->
 		<div id="tabViews">

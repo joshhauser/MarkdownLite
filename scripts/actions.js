@@ -1,18 +1,20 @@
 /**
- * et a new text cookie or change an existing cookie
- * @param {HTMLElement} editor 
+ * 
+ * @param {*} editor 
+ * @param {*} editorId 
  */
-function setTextCookie(editor) {
-  if (editor.innerText != "") {
-    // Expiration date
+function setTextCookie(editor, editorId) {
+  if (getCookie("acceptCookies") == "yes" && editor.innerText != "") {
     let date = new Date();
     date.setTime(date.getTime() + 2 * 24 * 60 * 60 * 1000);
-    let expires = "expires=" + date.toUTCString();
-    // Replace "\n" in string because they're not interpreted in the cookie
-    let text = editor.innerText.replace(/\n/g, "\\n")
+    let expires = `expires=${date.toUTCString()}`;
+    let text = editor.innerText.replace(/\n/g, "\\n");
     if (text.substring(text.length - 2) == "\\n") text = text.substring(0, text.length - 2);
-    // Cookie
-    document.cookie = "text=" + text + "; " + expires + "; " + "path=/";
+    document.cookie = `editor-${editorId}=${text}; ${expires}; path=/`;
+  }
+  else {
+    textCookie = getCookie(`editor-${editorId}`);
+    if (textCookie) resetCookie(`editor-${editorId}`);
   }
 }
 
@@ -23,6 +25,7 @@ function setTextCookie(editor) {
  * @param {int} duration : duration (number of days)
  */
 function setCookie(name, value, duration) {
+  if (getCookie("acceptCookies") == null && name != "acceptCookies") return;
   let date = new Date();
   date.setTime(date.getTime() + duration * 24 * 60 * 60 * 1000);
   let expires = "expires=" + date.toUTCString();
@@ -40,10 +43,10 @@ function getCookie(cookieName) {
   // Decoded cookie
   let decodedCookie = decodeURIComponent(document.cookie);
   // Splitted cookie
-  let cookie = decodedCookie.split(';');
+  let cookie = decodedCookie.split('; ');
 
-  for(var i = 0; i < cookie.length; i++) {
-    var str = cookie[i];
+  for(let i = 0; i < cookie.length; i++) {
+    let str = cookie[i];
 
     // Extract cookie from string at current index without useless spaces
     while (str.charAt(0) == " ") str = str.substring(1);
@@ -54,6 +57,15 @@ function getCookie(cookieName) {
   return null;
 }
 
+function getTextsCookies() {
+  let decodedCookies = decodeURIComponent(document.cookie);
+  let cookies = decodedCookies.split('; ');
+  console.log(cookies)
+  let textCookies = cookies.filter((elt) => elt.match(/editor-[1-9]+=.*/g));
+
+  return textCookies;
+}
+
 /**
  * Reset the cookie that has the same name as the one passed as parameter
  * @param {string} cookieName : cookie name
@@ -62,10 +74,9 @@ function resetCookie(cookieName) {
   if (getCookie(cookieName != null)) document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-
 /**
  * Make a file with the text then open a download dialog
- * @param {string} filetype: HTML or MD
+ * @param {string} filetype: HTML/MD/txt
  */
 function save(filetype) {
   // Get filename from text input
@@ -86,10 +97,15 @@ function save(filetype) {
     extension = ".html";
     target = display.innerHTML;
   }
-  else {
+  else if(filetype == "MD") {
     contentType = "text/plain";
     extension = ".md";
     target = editor.innerText;
+  }
+  else {
+    contentType = "text/plain";
+    extension = ".txt";
+    target = removeMdTags(editor.innerText);
   }
 
   // File creation
@@ -105,9 +121,7 @@ function save(filetype) {
   document.getElementById("filename").value = "";
 }
 
-/**
- * Load a file then put its content in editor div
- */
+// Loads a file then put its content in editor div
 function load() {
   // Get the file selected by user through file opening dialog
   let file = document.getElementById("fileLoader").files[0];
@@ -115,9 +129,13 @@ function load() {
   file.text().then(text => {
     editor.innerText = text;
     parse();
-  });  
+  });
 }
 
+/**
+ * Close a dialog corresponding to the id passed as parameter
+ * @param {string} dialogID : the id of the dialog to close
+ */
 function closeDialog(dialogID) {
   let dialog = document.getElementById(dialogID);
   if (dialog) {
@@ -126,6 +144,68 @@ function closeDialog(dialogID) {
   }
 }
 
+// Display "about this"
 function displayAboutThis() {
   document.getElementById("about-this").style.display = "block";
+}
+
+/**
+ * Set/unset nightmode based on "active" boolean
+ * @param {boolean} active
+ */
+function setNightmode(active) {
+  console.log(active)
+  let htmlPage = document.getElementsByTagName("html")[0];
+  if (active) htmlPage.classList.add("darkmode");
+  else htmlPage.classList.remove("darkmode");
+
+  /*
+  let htmlPage = document.getElementsByTagName("html")[0];
+  let editor = document.getElementById("editor");
+  let editors = document.getElementsByClassName("editor");
+  let displayer = document.getElementsByClassName("wysiwyg-display")[0];
+
+  if (active) {
+    htmlPage.style.backgroundColor = "#292929";
+    
+    htmlPage.style.transitionDuration = "0.1s";
+    
+    for (let editor of editors) {
+      editor.style.borderColor = "white";
+      editor.style.color = "white";
+    }
+    displayer.style.color = "white";
+    setCookie("nightmode", "yes", 30);
+  }
+  else {
+    htmlPage.style.backgroundColor = "white";
+
+    for (let editor of editors) {
+      editor.style.borderColor = "black";
+      editor.style.color = "black";
+    }
+    displayer.style.color = "black";
+    setCookie("nightmode", "no", 30);
+  }
+  */
+}
+
+// Return true if nightmode is active, or else no
+function isNightmodeActive() {
+  nightmodeCookie = getCookie("nightmode");
+  if (nightmodeCookie) {
+    if (nightmodeCookie == "yes") return true;
+    else return false;
+  }
+}
+
+function removeMdTags(mdText) {
+  mdText.replace(/# /g, "");
+  mdText.replace(/## /g, "");
+  mdText.replace(/### /g, "");
+  mdText.replace(/#### /g, "");
+  mdText.replace(/##### /g, "");
+  mdText.replace(/###### /g, "");
+
+  return mdText;
 }

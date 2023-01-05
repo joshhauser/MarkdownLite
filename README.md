@@ -1,2 +1,12 @@
 # MarkdownLite
-Very simple Markdown WYSIWYG.
+
+## Description
+Very simple Markdown WYSIWYG editor made with HTML, CSS and vanilla JS.
+
+## Features
+
+- Write text with titles Markdown tags
+- Load .md file
+- Save text as .md and .html
+- Nightmode
+- Cookies alert
