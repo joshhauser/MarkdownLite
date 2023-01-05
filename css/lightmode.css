@@ -4,6 +4,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  background-color: #4fa2e3;
 }
 
 #toolbar {
@@ -13,7 +14,7 @@ html, body {
   right: 0;
   height: 6%;
   z-index: 1;
-  box-shadow: 2px 2px 2px #4a73a8;
+  box-shadow: 1px 1px 1px #4a73a8;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -115,25 +116,47 @@ html, body {
 }
 
 .wysiwyg-container {
+  background-color: #4fa2e3;
   margin-top: 1%;
   width: 99%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
   display: flex;
+  color: white;
+  justify-content: space-between;
+  padding: 0 1%;
+}
+
+.wysiwyg-editor::-webkit-scrollbar, .wysiwyg-display::-webkit-scrollbar {
+  display: none;
 }
 
 .wysiwyg-editor {
-	width: 49%;
+	width: 47%;
 	border: 1px solid black;
-	padding: 5px;
-  overflow: scroll;
+	padding: 1%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #4fa2e3;
+  color: white;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 12px #205f8f,inset -3px -3px 6px #f1f1f1;
+  border: 1px solid #64afe7;
+  overflow: auto;
+  overflow-wrap: break-word;
 }
 
 .wysiwyg-display {
-  width: 49%;
+  width: 47%;
   padding: 5px;
-  overflow: scroll;
   font-family: "Roboto Regular";
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #4fa2e3;
+  color: white;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 12px #205f8f,inset -3px -3px 6px #f1f1f1;
+  border: 1px solid #64afe7;
+  overflow: auto;
+  overflow-wrap: break-word;
 }
 
 .wysiwyg-display h1, .wysiwyg-display h2, .wysiwyg-display h3, .wysiwyg-display h4 {
