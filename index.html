@@ -1,118 +1,140 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-	<head>
-		<meta charset="utf-8" />
-    <meta name="author" content='Joshua Hauser'>
-    <meta name="description" content="Editeur Markdown">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" href="css/darkmode.css">
-		<link rel="stylesheet" href="css/fonts.css">
-		<link rel="stylesheet" href="css/tabs.css">
-		<link rel="stylesheet" href="css/lightmode.css">
-		<script src="scripts/loading.js"></script>
-    <script src="scripts/parser.js"></script>
-    <script src="scripts/actions.js"></script>
-		<script src="scripts/tabs.js"></script>
-    <title>Markdown Lite</title>
-	</head>
-	<body>
-		<div id="cookies-alert">
-			<div>
-				<div id="cookies-alert-content">
-					<h1>Cookies</h1>
-					<p>This website saves cookies for the followings features:
-						<ul>
-							<li>text saving in navigator</li>
-							<li>nightmode</li>
-							<li>cheat sheet display during first visit</li>
-						</ul>
-					</p>
-				</div>
-				<nav id="cookies-alert-buttons">
-					<button onclick="setCookie('acceptCookies', 'yes', 30); closeDialog('cookies-alert')">Accept</button>
-					<br>
-					<span class="clear"></span>
-					<button onclick="setCookie('acceptCookies', 'no', 30); closeDialog('cookies-alert')">Reject</button>
-				</nav>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content='Joshua Hauser'>
+	<meta name="description" content="Editeur Markdown">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="css/darkmode.css">
+	<link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="css/tabs.css">
+	<link rel="stylesheet" href="css/lightmode.css">
+	<script src="scripts/loading.js"></script>
+	<script src="scripts/parser.js"></script>
+	<script src="scripts/actions.js"></script>
+	<script src="scripts/tabs.js"></script>
+	<title>Markdown Lite</title>
+</head>
+
+<body>
+	<div id="cookies-alert">
+		<div>
+			<div id="cookies-alert-content">
+				<h1>Cookies</h1>
+				<p>This website saves cookies for the followings features:
+				<ul>
+					<li>text saving in navigator</li>
+					<li>nightmode</li>
+					<li>cheat sheet display during first visit</li>
+				</ul>
+				</p>
+			</div>
+			<nav id="cookies-alert-buttons">
+				<button onclick="setCookie('acceptCookies', 'yes', 30); closeDialog('cookies-alert')">Accept</button>
+				<br>
+				<span class="clear"></span>
+				<button onclick="setCookie('acceptCookies', 'no', 30); closeDialog('cookies-alert')">Reject</button>
+			</nav>
+		</div>
+	</div>
+	<div id="cheats-sheet" class="dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>Markdown cheats sheet</h1>
+				<span class="close-dialog" onclick="closeDialog('cheats-sheet')">&times;</span>
+			</div>
+			<hr>
+			<div class="modal-body">
+				<h2>Markdown tags and HTML equivalent</h2>
+				<table cellpadding="6" cellspacing="0">
+					<tr>
+						<th>Markdown</th>
+						<th>HTML</th>
+					</tr>
+					<tr>
+						<td>#</td>
+						<td>&lt;h1&gt; &lt;/h1&gt;</td>
+					</tr>
+					<tr>
+						<td>##</td>
+						<td>&lt;h2&gt; &lt;/h2&gt;</td>
+					</tr>
+					<tr>
+						<td>###</td>
+						<td>&lt;h3&gt; &lt;/h3&gt;</td>
+					</tr>
+					<tr>
+						<td>####</td>
+						<td>&lt;h4&gt; &lt;/h4&gt;</td>
+					</tr>
+				</table>
 			</div>
 		</div>
-		<div id="cheats-sheet" class="dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1>Markdown cheats sheet</h1>
-					<span class="close-dialog" onclick="closeDialog('cheats-sheet')">&times;</span>
-				</div>
-				<hr>
-				<div class="modal-body">
-					<h2>Markdown tags and HTML equivalent</h2>
-					<table cellpadding="6" cellspacing="0">
-						<tr><th>Markdown</th><th>HTML</th></tr>
-						<tr><td>#</td><td>&lt;h1&gt; &lt;/h1&gt;</td></tr>
-						<tr><td>##</td><td>&lt;h2&gt; &lt;/h2&gt;</td></tr>
-						<tr><td>###</td><td>&lt;h3&gt; &lt;/h3&gt;</td></tr>
-						<tr><td>####</td><td>&lt;h4&gt; &lt;/h4&gt;</td></tr>
-					</table>
-				</div>
+	</div>
+	<div id="about-this" class="dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>Markdown Lite</h1>
+				<span class="close-dialog" onclick="closeDialog('about-this')">&times;</span>
+			</div>
+			<hr>
+			<div class="modal-body">
+				<p>Markdown Lite is a very simple WYSIWYG (What You See Is What You Get) editor, using a lightened Markdown
+					syntax.</p>
+				<p>The typed text is converted to HTML in realtime.</p>
+				<p>You can save your text as a Markdown/HTML file.</p>
+				<p>You can load Markdown file, it will be automatically converted to HTML.</p>
 			</div>
 		</div>
-		<div id="about-this" class="dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1>Markdown Lite</h1>
-					<span class="close-dialog" onclick="closeDialog('about-this')">&times;</span>
-				</div>
-				<hr>
-				<div class="modal-body">
-					<p>Markdown Lite is a very simple WYSIWYG (What You See Is What You Get) editor, using a lightened Markdown syntax.</p>
-					<p>The typed text is converted to HTML in realtime.</p>
-					<p>You can save your text as a Markdown/HTML file.</p>
-					<p>You can load Markdown file, it will be automatically converted to HTML.</p>
-				</div>
+	</div>
+	<!-- Toolbar -->
+	<div id="toolbar">
+		<div id="neumorphic-buttons">
+			<!-- File opening dialog -->
+			<input id="fileLoader" type="file" accept=".md" hidden>
+			<!-- Loading button -->
+			<input id="load" class="neumorphic-button" type="button" value="Load">
+			<!-- Saving button -->
+			<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="neumorphic-button"
+				type="button" value="Save"></a>
+			<!-- Help button -->
+			<input id="load" class="neumorphic-button" type="button" onclick="displayAboutThis();" value="About this">
+		</div>
+		<label id="nightmode-switch">
+			<input id="nightmode-input" onclick="setNightmode(event.target.checked)" type="checkbox">
+			<span class="slider"></span>
+		</label>
+	</div>
+	<div class="tab">
+		<button class="tablink activeTab" onclick="setTab(event.target.innerText)" oncontextmenu="event.preventDefault();"
+			onmousedown="if (event.button == 2) deleteTab(event.target.innerText)">1</button>
+		<!-- <button class="tablink activeTab" onclick="setTab(event.target.innerText)">1</button> -->
+		<button id="new-tab-btn" onclick="addTab()">+</button>
+	</div>
+	<!-- Tab content -->
+	<div id="tabViews">
+		<div id="tab-1" class="tabContent activeTabView">
+			<div class="wysiwyg-container">
+				<!-- Markdown editor div -->
+				<div class="wysiwyg-editor" contenteditable="true"></div>
+				<!-- Result div -->
+				<div class="wysiwyg-display"></div>
 			</div>
-		</div>
-		<!-- Toolbar -->
-		<div id="toolbar">
-			<div id="neumorphic-buttons">
-				<!-- File opening dialog -->
-				<input id="fileLoader" type="file" accept=".md" hidden>
-				<!-- Loading button -->
-				<input id="load" class="neumorphic-button" type="button" value="Load">
-				<!-- Saving button -->
-				<a href="#" id="save" style="display: none;"></a><input id="openFiletypeDialog" class="neumorphic-button" 	type="button" value="Save"></a>
-				<!-- Help button -->
-				<input id="load" class="neumorphic-button" type="button" onclick="displayAboutThis();" value="About this">
-			</div>
-			<label id="nightmode-switch">
-				<input id="nightmode-input" onclick="setNightmode(event.target.checked)" type="checkbox">
-				<span class="slider"></span>
-			</label>
-		</div>
-		<div class="tab">
-			<button class="tablink activeTab" onclick="setTab(event.target.innerText)" oncontextmenu="event.preventDefault();" onmousedown="if (event.button == 2) deleteTab(event.target.innerText)">1</button>
-			<!-- <button class="tablink activeTab" onclick="setTab(event.target.innerText)">1</button> -->
-			<button id="new-tab-btn" onclick="addTab()">+</button>
-		</div>
-		<!-- Tab content -->
-		<div id="tabViews">
-			<div id="tab-1" class="tabContent activeTabView">
-				<div class="wysiwyg-container">
-					<!-- Markdown editor div -->
-					<div class="wysiwyg-editor" contenteditable="true"></div>
-					<!-- Result div -->
-					<div class="wysiwyg-display"></div>
-				</div>
-				<!-- Dialog to choose format for the file to be saved -->
-				<div id="filetypeDialog" class="dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3>Which format ?</h3>
-							<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
-						</div>
-						<hr>
-						<div class="modal-body">
+			<!-- Dialog to choose format for the file to be saved -->
+			<div id="filetypeDialog" class="dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Which format ?</h3>
+						<span class="close-dialog" onclick="closeDialog('filetypeDialog')">&times;</span>
+					</div>
+					<hr>
+					<div class="modal-body">
+						<div class="row">
 							<label for="filename">File name: </label>
 							<input id="filename" type="text">
-							<br>
+						</div>
+						<div class="row">
 							<button class="neumorphic-button" id="saveAsHTML" onclick="save('HTML')">HTML</button>
 							<button class="neumorphic-button" id="saveAsMD" onclick="save('MD')">Markdown</button>
 							<button class="neumorphic-button" id="saveAsTXT" onclick="save('TXT')">TXT</button>
@@ -121,5 +143,7 @@
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
