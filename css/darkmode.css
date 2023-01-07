@@ -30,10 +30,10 @@
 
 .darkmode .tab {
   background: #1e1e1e;
-  color: white;
 }
 
 .darkmode .tab .tablink {
+  color: white;
   background: #1e1e1e;
   box-shadow: 
   2px 2px 5px rgba(0, 0, 0, 0.446),
@@ -71,6 +71,7 @@
 }
 
 .darkmode .wysiwyg-display, .darkmode .wysiwyg-editor {
+  color: white;
   box-shadow:
   inset 4px 4px 7px #101011c9, 
   inset -3px -3px 7px #f1f1f13a;

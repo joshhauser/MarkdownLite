@@ -175,6 +175,10 @@ input[type="text"] {
   overflow-wrap: break-word;
 }
 
+.wysiwyg-editor:active {
+  outline: none;
+}
+
 .wysiwyg-display {
   width: 47%;
 	padding: 1%;
