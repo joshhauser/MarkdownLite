@@ -40,7 +40,7 @@ function parse(text){
           break;
 
         case "#####":
-          newText == "<h5>" + sub + "</h5>";
+          newText += "<h5>" + sub + "</h5>";
           break;
 
         case "######":
