@@ -89,7 +89,6 @@ input[type="text"] {
   box-shadow: 
   inset 3px 3px 6px #4b505acd,
   inset -5px -5px 6px #a6afc2;  border-radius: 73px;
-  transition: .4s;
 }
 
 .slider:before {
@@ -330,7 +329,6 @@ input[type="text"] {
   outline: none;
   cursor: pointer;
   padding: 0.5% 2%;
-  transition: 0.3s;
   height: 75%;
   width: 80px;
   display: flex;
@@ -359,7 +357,6 @@ input[type="text"] {
   inset -5px -5px 6px #a6afc2;
 }
 
-/* Style the tab content */
 #tabViews  {
   display: flex;
   align-items: stretch;
@@ -380,13 +377,21 @@ input[type="text"] {
   width: 100%;
 }
 
+.tab .tablink,
+#new-tab-btn,
+.wysiwyg-container,
+.wysiwyg-display,
+.wysiwyg-editor,
+.neumorphic-button,
+.slider {
+  transition: 0.3s;
+}
 
 @media(max-width: 1400px) {
   #cheats-sheet h1 {
     margin-top: 10%;
   }
 }
-
 
 @media(max-width: 1200px) {
   .wysiwyg-editor, .wysiwyg-display {

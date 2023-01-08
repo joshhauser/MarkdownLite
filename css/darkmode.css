@@ -1,34 +1,35 @@
-.darkmode html, .darkmode body {
-  background-color: #1e1e1e;
+.darkmode {
+  color: white;
 }
 
 .darkmode #toolbar {
+  color: inherit;
   background-color: #1e1e1e;
   box-shadow: 1px 1px 1px #3a3a3a;
 }
 
 .darkmode .neumorphic-button {
+  color: inherit;
   background-color: #1e1e1e;
-  color: white;
-  box-shadow: 
+  box-shadow:
   2px 2px 5px rgba(0, 0, 0, 0.446),
   -3px -3px 7px rgba(64, 67, 67, 0.699);
 }
 
 .darkmode .neumorphic-button:active {
-  box-shadow: 
+  box-shadow:
   inset 2px 2px 5px rgba(0, 0, 0, 0.446), 
   inset -3px -3px 7px rgba(64, 67, 67, 0.699);
 }
 
 .darkmode .slider {
   background: #1e1e1e;
-  box-shadow: 
+  box-shadow:
   inset 2px 2px 5px rgba(0, 0, 0, 0.446), 
   inset -3px -3px 7px rgba(64, 67, 67, 0.699);
 }
 
-.darkmode .tab {
+.darkmode .tab, .darkmode .tabContent {
   background: #1e1e1e;
 }
 
@@ -50,6 +51,7 @@
 }
 
 .darkmode .tab #new-tab-btn {
+  color: inherit;
   background: #1e1e1e;
   box-shadow: 
   2px 2px 5px rgba(0, 0, 0, 0.446),
@@ -78,7 +80,17 @@
 }
 
 .darkmode .modal-content {
+  color: inherit;
   border: 1px solid #35353556;
+  background-color: #1e1e1e;
+  box-shadow: 
+  inset 4px 4px 7px #101011c9, 
+  inset -3px -3px 7px #f1f1f13a;
+}
+
+.darkmode input[type="text"] {
+  border: 1px solid #35353556;
+  background-color: #1e1e1e;
   box-shadow: 
   inset 4px 4px 7px #101011c9, 
   inset -3px -3px 7px #f1f1f13a;
