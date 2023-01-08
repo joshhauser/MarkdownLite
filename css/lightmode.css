@@ -172,9 +172,6 @@ input[type="text"] {
   inset -5px -5px 6px #a6afc2;
   overflow: auto;
   overflow-wrap: break-word;
-}
-
-.wysiwyg-editor:active {
   outline: none;
 }
 

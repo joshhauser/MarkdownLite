@@ -13,6 +13,7 @@ function closeDialog(dialogID) {
   let dialog = document.getElementById(dialogID);
   if (dialog) {
     dialog.style.display = "none";
+    const editor = utils.getCurrentEditor();
     editor.focus();
   }
 }
