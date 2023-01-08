@@ -7,6 +7,7 @@ const markdownTags = ["#", "##", "###", "####", "#####", "######", "-"]
  * Parse the edited text to find
  * Markdown tags and replace them with
  * HTML tags
+ * @param {String} text the text to parse
  */
 function parse(text){
   let lines = text.split("\n");
@@ -62,7 +63,7 @@ function parse(text){
 
 /**
  * Copy the HTML text as plain text
- * @param {string} text
+ * @param {String} text the text to copy
  */
 function copyAsPlainText(text) {
   let activeTabView = document.getElementsByClassName("activeTabView");

@@ -7,7 +7,7 @@ let timeouts = [];
 
 /**
  * Close a dialog corresponding to the id passed as parameter
- * @param {string} dialogID : the id of the dialog to close
+ * @param {String} dialogID the id of the dialog to close
  */
 function closeDialog(dialogID) {
   let dialog = document.getElementById(dialogID);
@@ -24,7 +24,7 @@ function displayAboutThis() {
 
 /**
  * Set/unset nightmode based on "active" boolean
- * @param {boolean} active
+ * @param {boolean} active is true if nightmode should be activated
  */
 function setNightmode(active) {
   let htmlPage = document.getElementsByTagName("html")[0];
@@ -32,16 +32,10 @@ function setNightmode(active) {
   else htmlPage.classList.remove("darkmode");
 }
 
-// Return true if nightmode is active, or else no
-function isNightmodeActive() {
-  nightmodeCookie = utils.getCookie("nightmode");
-  if (nightmodeCookie) {
-    if (nightmodeCookie == "yes") return true;
-    else return false;
-  }
-}
-
-
+/**
+ * Add a new tab
+ * @returns the editor created in the new tab
+ */
 function addTab() {
   tabsCount++;
   currentTabIndex = tabsCount;
@@ -102,6 +96,11 @@ function addTab() {
   return wysiwygEditor;
 }
 
+/**
+ * Change the current tab
+ * @param {Number} tabIndex the index of the tab to set
+ * as current tab 
+ */
 function setTab(tabIndex) {
   let activeTabLink = document.getElementsByClassName("activeTab");
   if (activeTabLink.length != 0) {
@@ -119,8 +118,11 @@ function setTab(tabIndex) {
   tabViews[tabIndex - 1].classList.add("activeTabView");
 }
 
+/**
+ * Delete the given tab
+ * @param {Number} tabIndex the index of the tab to delete
+ */
 function deleteTab(tabIndex) {
-  console.log(tabIndex)
   if (tabsCount === 1) return;
 
   let tabLinks = document.getElementsByClassName("tablink");

@@ -1,3 +1,14 @@
+/**
+ * TODO:
+ * - fix tab deletion --> can't delete last tab
+ */
+
+/**
+ * Remove Markdown tags from mdText
+ * @param {String} mdText the text that contains
+ * Markdown tags to remove
+ * @returns the text without markdown tags
+ */
 function removeMdTags(mdText) {
   mdText.replace(/# /g, "");
   mdText.replace(/## /g, "");
@@ -10,9 +21,10 @@ function removeMdTags(mdText) {
 }
 
 /**
- * 
- * @param {*} editor 
- * @param {*} editorId 
+ * Set the text cookie for a given editor
+ * @param {HTMLElement} editor the editor for which
+ * text cookie has to be set
+ * @param {Number} editorId the id of the given editor
  */
 function setTextCookie(editor, editorId) {
   if (getCookie("acceptCookies") == "yes" && editor.innerText != "") {
@@ -24,15 +36,15 @@ function setTextCookie(editor, editorId) {
     document.cookie = `editor-${editorId}=${text}; ${expires}; path=/`;
   }
   else {
-    textCookie = getCookie(`editor-${editorId}`);
+    let textCookie = getCookie(`editor-${editorId}`);
     if (textCookie) resetCookie(`editor-${editorId}`);
   }
 }
 
 /**
  * Set a new cookie
- * @param {string} name : cookie name
- * @param {string} value : cookie value
+ * @param {String} name : cookie name
+ * @param {String} value : cookie value
  * @param {int} duration : duration (number of days)
  */
 function setCookie(name, value, duration) {
@@ -40,15 +52,14 @@ function setCookie(name, value, duration) {
   let date = new Date();
   date.setTime(date.getTime() + duration * 24 * 60 * 60 * 1000);
   let expires = "expires=" + date.toUTCString();
-  // Replace "\n" in string because they're not interpreted in the cookie
   document.cookie = name + "=" + value + "; " + expires + "; " + "path=/";
 }
 
 
 /**
  * Return a cookie that has the same name as the one passed as parameter
- * @param {string} cookieName : cookie name
- * @return {string} : cookie value
+ * @param {String} cookieName : cookie name
+ * @return {String} : cookie value
  */
 function getCookie(cookieName) {
   // Decoded cookie
@@ -68,6 +79,10 @@ function getCookie(cookieName) {
   return null;
 }
 
+/**
+ * Get all text cookies
+ * @returns all text cookies
+ */
 function getTextsCookies() {
   let decodedCookies = decodeURIComponent(document.cookie);
   let cookies = decodedCookies.split('; ');
@@ -77,8 +92,8 @@ function getTextsCookies() {
 }
 
 /**
- * Reset the cookie that has the same name as the one passed as parameter
- * @param {string} cookieName : cookie name
+ * Reset a given cookie
+ * @param {String} cookieName the name of the cookie to reset
  */
 function resetCookie(cookieName) {
   if (getCookie(cookieName != null)) document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -86,7 +101,7 @@ function resetCookie(cookieName) {
 
 /**
  * Make a file with the text then open a download dialog
- * @param {string} filetype: HTML/MD/txt
+ * @param {String} filetype: HTML/MD/txt
  */
 function saveFile(filetype) {
   // Get filename from text input
@@ -142,6 +157,9 @@ function saveFile(filetype) {
   }
 }
 
+/**
+ * Load a file to set current editor text
+ */
 function loadFile() {
   let file = document.getElementById("fileLoader").files[0];
   if (file) {
@@ -155,6 +173,10 @@ function loadFile() {
   }
 }
 
+/**
+ * Get all texts from texts cookies
+ * @returns texts from texts cookies or null
+ */
 function getTexts() {
   let textsCookies = getTextsCookies();
   if (textsCookies.length > 0) {
@@ -166,6 +188,10 @@ function getTexts() {
   return null;
 }
 
+/**
+ * Get the editor currently displayed
+ * @returns the current editor
+ */
 function getCurrentEditor() {
   let activeTabView = document.getElementsByClassName("activeTabView");
   let currentEditor = activeTabView[0].getElementsByClassName("wysiwyg-editor");
@@ -173,6 +199,10 @@ function getCurrentEditor() {
   return currentEditor[0] || null;
 }
 
+/**
+ * Get the current 'display' div
+ * @returns the current 'display' div
+ */
 function getCurrentDisplay() {
   let activeTabView = document.getElementsByClassName("activeTabView");
   let currentDisplay = activeTabView[0].getElementsByClassName("wysiwyg-display");
