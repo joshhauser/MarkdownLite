@@ -1,19 +1,10 @@
-// This script loads necessary content for the app
-
+import * as utils from './utils.js';
+import * as uiActions from './uiActions.js';
+import * as parseActions from './parser.js';
 
 window.onload = () => {
-  // Add event listener for "load" button
-  document.getElementById("load").addEventListener("click", () => {
-    // Open the file opening dialog
-    document.getElementById("fileLoader").click();
-    // Call load() once the user selected a file
-    document.getElementById("fileLoader").onchange = load;
-  });
-
   // "editors" div
   let defaultEditor = document.getElementsByClassName("wysiwyg-editor")[0];
-  // "display" div
-  let displays = document.getElementsByClassName("wysiwyg-display");
   // Dialog used to choose file type for saving
   let filetypeDialog = document.getElementById("filetypeDialog");
   // Button to open filetypeDialog
@@ -27,26 +18,36 @@ window.onload = () => {
   // Cookies alert banner
   let cookiesAlertBanner = document.getElementById("cookies-alert");
   // Cookie "first visit"
-  let alreadyVisitedCookie = getCookie("alreadyVisited");
+  let alreadyVisitedCookie = utils.getCookie("alreadyVisited");
   // Night mode cookie
-  let nightmodeCookie = getCookie("nightmode");
+  let nightmodeCookie = utils.getCookie("nightmode");
   // "Cookies acceptation" cookie
-  let cookiesAcception = getCookie("acceptCookies");
+  let cookiesAcception = utils.getCookie("acceptCookies");
 
+    // Add event listener for "load" button
+    document.getElementById("load").addEventListener("click", () => {
+      // Open the file opening dialog
+      document.getElementById("fileLoader").click();
+      // Call load() once the user selected a file
+      document.getElementById("fileLoader").onchange = load;
+    });
+  
+    // Displays filetypeDialog
+    openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
 
   if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
   else cookiesAlertBanner.style.display = "block"
-
+  
   // Display cheat sheet for first visit
   if (!alreadyVisitedCookie) {
     cheatsSheet.style.display = "block";
-    setCookie("alreadyVisited", "yes", 30);
+    utils.setCookie("alreadyVisited", "yes", 30);
   }
   else {
     cheatsSheet.style.display = "none";
   }
 
-  let texts = getTexts();
+  let texts = utils.getTexts();
   if (texts != null) {
     if (texts.length >= 1) {
       defaultEditor.innerText = texts[0];
@@ -54,7 +55,7 @@ window.onload = () => {
     
     if (texts.length > 1) {
       for (let i = 1; i < texts.length; i++) {
-        let newEditor = addTab();
+        let newEditor = uiActions.addTab();
         newEditor.innerText = texts[i];
       }
     }
@@ -62,41 +63,39 @@ window.onload = () => {
 
   // Refresh nightmode
   if (nightmodeCookie && nightmodeCookie == "yes") {
-    setNightmode(true);
+    uiActions.setNightmode(true);
     nightmodeSwitch.checked = true;
   }
   else {
-    setNightmode(false);
+    uiActions.setNightmode(false);
     nightmodeSwitch.checked = false;
   }
 
   // At each char input in "editor", the script call parse()
   let timeout = null;
   defaultEditor.addEventListener("input", () => {
-    parse(defaultEditor.innerText);
+    parseActions.parse(defaultEditor.innerText);
     // Save text as a cookie at each input (temporary)
 
-    let timeout = setTimeout(() => setTextCookie(defaultEditor, 1), 3000)
+    let timeout = setTimeout(() => utils.setTextCookie(defaultEditor, 1), 3000)
   });
 
-  // Displays filetypeDialog
-  openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
 
   // Removes filetypeDialog if the user clicks outside
   window.onclick = (event) => {
     if (event.target.id == "filetypeDialog") {
       filetypeDialog.style.display = "none";
-      let currentEditor = getCurrentEditor();
+      let currentEditor = utils.getCurrentEditor();
       if (currentEditor) currentEditor.focus()
     }
     else if (event.target.id == "cheats-sheet") {
       cheatsSheet.style.display = "none";
-      let currentEditor = getCurrentEditor();
+      let currentEditor = utils.getCurrentEditor();
       if (currentEditor) currentEditor.focus()
     }
     else if (event.target.id == "about-this") {
       aboutThis.style.display = "none";
-      let currentEditor = getCurrentEditor();
+      let currentEditor = utils.getCurrentEditor();
       if (currentEditor) currentEditor.focus()
     }
   }
@@ -108,22 +107,4 @@ window.onload = () => {
       if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
     }
   });
-}
-
-function getCurrentEditor() {
-  let activeTabView = document.getElementsByClassName("activeTabView");
-  let currentEditor = activeTabView[0].getElementsByClassName("wysiwyg-editor");
-
-  return currentEditor[0] || null;
-}
-
-function getTexts() {
-  let textsCookies = getTextsCookies();
-  if (textsCookies.length > 0) {
-    let texts = [];
-    textsCookies.forEach(cookie => texts.push(cookie.split('=')[1]));
-    return texts;
-  }
-
-  return null;
 }

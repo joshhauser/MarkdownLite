@@ -1,6 +1,46 @@
+import * as parseActions from './parser.js';
+import * as utils from './utils.js';
+
 let tabsCount = 1;
 let currentTabIndex = 1;
 let timeouts = [];
+
+/**
+ * Close a dialog corresponding to the id passed as parameter
+ * @param {string} dialogID : the id of the dialog to close
+ */
+function closeDialog(dialogID) {
+  let dialog = document.getElementById(dialogID);
+  if (dialog) {
+    dialog.style.display = "none";
+    editor.focus();
+  }
+}
+
+// Display "about this"
+function displayAboutThis() {
+  document.getElementById("about-this").style.display = "block";
+}
+
+/**
+ * Set/unset nightmode based on "active" boolean
+ * @param {boolean} active
+ */
+function setNightmode(active) {
+  let htmlPage = document.getElementsByTagName("html")[0];
+  if (active) htmlPage.classList.add("darkmode");
+  else htmlPage.classList.remove("darkmode");
+}
+
+// Return true if nightmode is active, or else no
+function isNightmodeActive() {
+  nightmodeCookie = utils.getCookie("nightmode");
+  if (nightmodeCookie) {
+    if (nightmodeCookie == "yes") return true;
+    else return false;
+  }
+}
+
 
 function addTab() {
   tabsCount++;
@@ -43,8 +83,8 @@ function addTab() {
   wysiwygEditor.contentEditable = true;
 
   wysiwygEditor.addEventListener("input", () => {
-    parse(wysiwygEditor.innerText);
-    let timeout = setTimeout(() => setTextCookie(wysiwygEditor, currentTabIndex), 3000)
+    parseActions.parse(wysiwygEditor.innerText);
+    let timeout = setTimeout(() => utils.setTextCookie(wysiwygEditor, currentTabIndex), 3000)
     if (timeouts.length == tabsCount) timeouts[currentTabIndex - 1] = timeout
     else timeouts.push(timeout);
   });
@@ -91,4 +131,13 @@ function deleteTab(tabIndex) {
   if (tabIndex > 1) setTab(tabIndex - 1);
   if (tabIndex == 1) setTab(2);
   tabsCount--;
+}
+
+export {
+  addTab,
+  deleteTab,
+  setTab,
+  setNightmode,
+  displayAboutThis,
+  closeDialog
 }

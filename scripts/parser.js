@@ -65,6 +65,9 @@ function parse(text){
  * @param {string} text
  */
 function copyAsPlainText(text) {
-  let activeDisplay = document.getElementsByClassName("activeTabView")[0].getElementsByClassName("wysiwyg-display")[0];
-  activeDisplay.innerHTML = text;
+  let activeTabView = document.getElementsByClassName("activeTabView");
+  let currentDisplay = activeTabView[0].getElementsByClassName("wysiwyg-display")[0];
+  if (currentDisplay) currentDisplay.innerHTML = text;
 }
+
+export { parse };

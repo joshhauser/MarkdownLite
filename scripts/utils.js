@@ -1,3 +1,14 @@
+function removeMdTags(mdText) {
+  mdText.replace(/# /g, "");
+  mdText.replace(/## /g, "");
+  mdText.replace(/### /g, "");
+  mdText.replace(/#### /g, "");
+  mdText.replace(/##### /g, "");
+  mdText.replace(/###### /g, "");
+
+  return mdText;
+}
+
 /**
  * 
  * @param {*} editor 
@@ -60,7 +71,6 @@ function getCookie(cookieName) {
 function getTextsCookies() {
   let decodedCookies = decodeURIComponent(document.cookie);
   let cookies = decodedCookies.split('; ');
-  console.log(cookies)
   let textCookies = cookies.filter((elt) => elt.match(/editor-[1-9]+=.*/g));
 
   return textCookies;
@@ -78,7 +88,7 @@ function resetCookie(cookieName) {
  * Make a file with the text then open a download dialog
  * @param {string} filetype: HTML/MD/txt
  */
-function save(filetype) {
+function saveFile(filetype) {
   // Get filename from text input
   let filename = document.getElementById("filename").value;
   if (!filename || filename == "") {
@@ -95,117 +105,91 @@ function save(filetype) {
   if (filetype == "HTML") {
     contentType = "text/html";
     extension = ".html";
-    target = display.innerHTML;
+    const currentDisplay = getCurrentDisplay();
+    if (currentDisplay) target = currentDisplay.innerHTML;
+    else target = null;
   }
   else if(filetype == "MD") {
     contentType = "text/plain";
     extension = ".md";
-    target = editor.innerText;
+    const currentEditor = getCurrentEditor();
+    if (currentEditor) target = currentEditor.innerText;
+    else target = null;
   }
   else {
     contentType = "text/plain";
     extension = ".txt";
-    target = removeMdTags(editor.innerText);
+    const currentDisplay = getCurrentDisplay();
+    if (currentDisplay) target = removeMdTags(currentDisplay.innerText);
+    else target = null;
   }
 
-  // File creation
-  let file = new Blob([target], {type: contentType});
-  // Settings for download link
-  save.href = URL.createObjectURL(file);
-  save.download = filename + extension;
-  // Open download dialog
-  save.click();
-  // Reset the download link
-  save.href = "#";
-  // Reset the input value
-  document.getElementById("filename").value = "";
-}
-
-// Loads a file then put its content in editor div
-function load() {
-  // Get the file selected by user through file opening dialog
-  let file = document.getElementById("fileLoader").files[0];
-  // Convert file to stream then put its content in "editor" div
-  file.text().then(text => {
-    editor.innerText = text;
-    parse();
-  });
-}
-
-/**
- * Close a dialog corresponding to the id passed as parameter
- * @param {string} dialogID : the id of the dialog to close
- */
-function closeDialog(dialogID) {
-  let dialog = document.getElementById(dialogID);
-  if (dialog) {
-    dialog.style.display = "none";
-    editor.focus();
-  }
-}
-
-// Display "about this"
-function displayAboutThis() {
-  document.getElementById("about-this").style.display = "block";
-}
-
-/**
- * Set/unset nightmode based on "active" boolean
- * @param {boolean} active
- */
-function setNightmode(active) {
-  console.log(active)
-  let htmlPage = document.getElementsByTagName("html")[0];
-  if (active) htmlPage.classList.add("darkmode");
-  else htmlPage.classList.remove("darkmode");
-
-  /*
-  let htmlPage = document.getElementsByTagName("html")[0];
-  let editor = document.getElementById("editor");
-  let editors = document.getElementsByClassName("editor");
-  let displayer = document.getElementsByClassName("wysiwyg-display")[0];
-
-  if (active) {
-    htmlPage.style.backgroundColor = "#292929";
-    
-    htmlPage.style.transitionDuration = "0.1s";
-    
-    for (let editor of editors) {
-      editor.style.borderColor = "white";
-      editor.style.color = "white";
-    }
-    displayer.style.color = "white";
-    setCookie("nightmode", "yes", 30);
+  if (target) {
+    // File creation
+    let file = new Blob([target], {type: contentType});
+    // Settings for download link
+    save.href = URL.createObjectURL(file);
+    save.download = filename + extension;
+    // Open download dialog
+    save.click();
+    // Reset the download link
+    save.href = "#";
+    // Reset the input value
+    document.getElementById("filename").value = "";
   }
   else {
-    htmlPage.style.backgroundColor = "white";
+    alert("There's a problem with file saving");
+  }
+}
 
-    for (let editor of editors) {
-      editor.style.borderColor = "black";
-      editor.style.color = "black";
+function loadFile() {
+  let file = document.getElementById("fileLoader").files[0];
+  if (file) {
+    let currentEditor = getCurrentEditor();
+    if (currentEditor) {
+      file.text().then(text => {
+        currentEditor.innerText = text;
+        parse(text);
+      })
     }
-    displayer.style.color = "black";
-    setCookie("nightmode", "no", 30);
-  }
-  */
-}
-
-// Return true if nightmode is active, or else no
-function isNightmodeActive() {
-  nightmodeCookie = getCookie("nightmode");
-  if (nightmodeCookie) {
-    if (nightmodeCookie == "yes") return true;
-    else return false;
   }
 }
 
-function removeMdTags(mdText) {
-  mdText.replace(/# /g, "");
-  mdText.replace(/## /g, "");
-  mdText.replace(/### /g, "");
-  mdText.replace(/#### /g, "");
-  mdText.replace(/##### /g, "");
-  mdText.replace(/###### /g, "");
+function getTexts() {
+  let textsCookies = getTextsCookies();
+  if (textsCookies.length > 0) {
+    let texts = [];
+    textsCookies.forEach(cookie => texts.push(cookie.split('=')[1]));
+    return texts;
+  }
 
-  return mdText;
+  return null;
 }
+
+function getCurrentEditor() {
+  let activeTabView = document.getElementsByClassName("activeTabView");
+  let currentEditor = activeTabView[0].getElementsByClassName("wysiwyg-editor");
+
+  return currentEditor[0] || null;
+}
+
+function getCurrentDisplay() {
+  let activeTabView = document.getElementsByClassName("activeTabView");
+  let currentDisplay = activeTabView[0].getElementsByClassName("wysiwyg-display");
+
+  return currentDisplay[0] || null;
+}
+
+export {
+  removeMdTags,
+  getCookie,
+  getTexts,
+  setCookie,
+  setTextCookie,
+  saveFile,
+  loadFile,
+  resetCookie,
+  getTextsCookies,
+  getCurrentDisplay,
+  getCurrentEditor
+};

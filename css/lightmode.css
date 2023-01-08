@@ -216,7 +216,6 @@ input[type="text"] {
 
 #cookies-alert > div {
   position: absolute;
-  background-color:white;
   margin-bottom: 0;
   left: 0;
   right: 0;
@@ -224,6 +223,13 @@ input[type="text"] {
   padding: 20px;
   border: 1px solid #888;
   color: rgb(48, 48, 48);
+  background-color: #8d99b4;
+  color: rgb(46, 46, 46);
+  font-family: 'Roboto Regular';
+  border: 1px solid #35353556;
+  box-shadow: 
+  inset 3px 3px 6px #4b505acd,
+  inset -5px -5px 6px #a6afc2;
 }
 
 #cookies-alert-content {
@@ -262,7 +268,6 @@ input[type="text"] {
 }
 
 #cheats-sheet h2 {
-  margin-top: -3%;
   font-size: 15pt;
 }
 
@@ -307,7 +312,7 @@ input[type="text"] {
 
 .close-dialog:hover,
 .close-dialog:focus {
-  color: rgb(131, 131, 131);
+  color: rgb(41, 41, 41);
   text-decoration: none;
   cursor: pointer;
   transition: .2s;
