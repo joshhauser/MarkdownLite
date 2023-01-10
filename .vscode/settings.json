@@ -1,4 +1,5 @@
 {
   "liveServer.settings.port": 5501,
-  "workbench.colorTheme": "GitHub Light Default"
+  "workbench.colorTheme": "GitHub Light Default",
+  "keyboard.layout": "0000040C"
 }
