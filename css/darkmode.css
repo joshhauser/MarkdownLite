@@ -98,6 +98,7 @@
   box-shadow: 
   inset 4px 4px 7px #101011c9, 
   inset -3px -3px 7px #f1f1f13a;
+  color: white;
 }
 
 .darkmode .wysiwyg-editor, .darkmode .wysiwyg-display {
