@@ -52,10 +52,9 @@ function parse(text){
           break;
       }
     }
-    else if (line != "\n") {
+    else if (line !== '\n' && line !== '\n\n') {
       newText += line + "<br>";
     }
-    //newText += "<br>";
   });
 
   copyAsPlainText(newText);

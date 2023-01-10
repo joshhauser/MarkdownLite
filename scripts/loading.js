@@ -74,7 +74,14 @@ window.onload = () => {
   // At each char input in "editor", the script call parse()
   let timeout = null;
   defaultEditor.addEventListener("input", () => {
-    parseActions.parse(defaultEditor.innerText);
+    const html = defaultEditor.children;
+    let text = "";
+    for (const node of html) {
+      const nodeText = node.innerText;
+      if (nodeText === "\n") text += nodeText
+      else text += nodeText + "\n";
+    }
+    parseActions.parse(text);
     // Save text as a cookie at each input (temporary)
 
     let timeout = setTimeout(() => utils.setTextCookie(defaultEditor, 1), 3000)
