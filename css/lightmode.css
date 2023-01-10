@@ -12,7 +12,7 @@ input[type="text"] {
   border-radius: .55rem;
   border: none;
   outline: none;
-  color: white;
+  color: rgb(46, 46, 46);
   font-size: 1rem;
   font-family: 'Roboto Regular';
   height: 1.5rem;
