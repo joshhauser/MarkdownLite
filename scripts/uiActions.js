@@ -1,7 +1,9 @@
 import * as parseActions from './parser.js';
 import * as utils from './utils.js';
+import TabLinkButton from './TabButton.js';
 
 let tabsCount = 1;
+let tabLinkButtons = [];
 let currentTabIndex = 1;
 let timeouts = [];
 
@@ -28,9 +30,13 @@ function displayAboutThis() {
  * @param {boolean} active is true if nightmode should be activated
  */
 function setNightmode(active) {
+  console.log(active)
   let htmlPage = document.getElementsByTagName("html")[0];
   if (active) htmlPage.classList.add("darkmode");
   else htmlPage.classList.remove("darkmode");
+  
+  let nightModeCookieVal = active ? 'yes' : 'no';
+  utils.setCookie('nightmode', nightModeCookieVal, 30);
 }
 
 /**
@@ -51,17 +57,20 @@ function addTab() {
   let activeTabView = document.getElementsByClassName("activeTabView");
   activeTabView[0].classList.remove("activeTabView");
 
-  let newTab = document.createElement("button");
-  newTab.classList.add("tablink","activeTab");
-  newTab.innerText = tabsCount;
-  newTab.onclick = setTab.bind(newTab, [newTab.innerText]);
-  newTab.oncontextmenu = (event) => { event.preventDefault(); }
-  newTab.onmousedown = (event) => {
-    if (event.button == 2) deleteTab(newTab.innerText);
+  let newTabLink = document.createElement("button");
+  newTabLink.classList.add("tablink","activeTab");
+  newTabLink.innerText = tabsCount;
+  newTabLink.onclick = setTab.bind(newTabLink, [newTabLink.innerText]);
+  newTabLink.oncontextmenu = (event) => { 
+    event.preventDefault();
   }
+  newTabLink.onmousedown = (event) => {
+    if (event.button == 2) deleteTab(newTabLink.innerText);
+  }
+  tabLinkButtons.push(new TabLinkButton(tabsCount, newTabLink));
 
   // Add new tab link
-  tabLinks.appendChild(newTab);
+  tabLinks.appendChild(newTabLink);
   tabLinks.appendChild(newTabBtn);
   
   // Create new tab panel
@@ -124,15 +133,19 @@ function setTab(tabIndex) {
  * @param {Number} tabIndex the index of the tab to delete
  */
 function deleteTab(tabIndex) {
+  console.log(tabIndex)
   if (tabsCount === 1) return;
+  let _tabIndex = Number(tabIndex); 
 
-  let tabLinks = document.getElementsByClassName("tablink");
+  let indexOfTabLink = tabLinkButtons.findIndex(btn => btn.id === _tabIndex);
+  tabLinkButtons[indexOfTabLink].htmlElement.remove();
+  tabLinkButtons.splice(indexOfTabLink, 1);
+  console.log(tabLinkButtons)
   let tabViews = document.getElementsByClassName("tabContent");
-  tabLinks[tabIndex - 1].remove();
-  tabViews[tabIndex - 1].remove();
+  tabViews[indexOfTabLink].remove();
 
-  if (tabIndex > 1) setTab(tabIndex - 1);
-  if (tabIndex == 1) setTab(2);
+  if (indexOfTabLink > 0) setTab(indexOfTabLink);
+  if (indexOfTabLink == 0) setTab(1);
   tabsCount--;
 }
 
@@ -142,5 +155,6 @@ export {
   setTab,
   setNightmode,
   displayAboutThis,
-  closeDialog
+  closeDialog,
+  tabLinkButtons
 }

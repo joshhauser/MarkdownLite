@@ -48,7 +48,9 @@ function setTextCookie(editor, editorId) {
  * @param {int} duration : duration (number of days)
  */
 function setCookie(name, value, duration) {
-  if (getCookie("acceptCookies") == null && name != "acceptCookies") return;
+  const acceptCookies = getCookie("acceptCookies");
+  if ((acceptCookies === null || acceptCookies === "no") && name != "acceptCookies") return;
+
   let date = new Date();
   date.setTime(date.getTime() + duration * 24 * 60 * 60 * 1000);
   let expires = "expires=" + date.toUTCString();

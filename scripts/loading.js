@@ -1,6 +1,7 @@
 import * as utils from './utils.js';
 import * as uiActions from './uiActions.js';
 import * as parseActions from './parser.js';
+import TabLinkButton from './TabButton.js';
 
 window.onload = () => {
   // "editors" div
@@ -23,21 +24,25 @@ window.onload = () => {
   let nightmodeCookie = utils.getCookie("nightmode");
   // "Cookies acceptation" cookie
   let cookiesAcception = utils.getCookie("acceptCookies");
+  // Default tablink
+  let defaultTabLink = document.getElementsByClassName("tablink")[0];
 
-    // Add event listener for "load" button
-    document.getElementById("load").addEventListener("click", () => {
-      // Open the file opening dialog
-      document.getElementById("fileLoader").click();
-      // Call load() once the user selected a file
-      document.getElementById("fileLoader").onchange = load;
-    });
-  
-    // Displays filetypeDialog
-    openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
+  uiActions.tabLinkButtons.push(new TabLinkButton(1, defaultTabLink));
+
+  // Add event listener for "load" button
+  document.getElementById("load").addEventListener("click", () => {
+    // Open the file opening dialog
+    document.getElementById("fileLoader").click();
+    // Call load() once the user selected a file
+    document.getElementById("fileLoader").onchange = load;
+  });
+
+  // Displays filetypeDialog
+  openFiletypeDialog.onclick = () => { filetypeDialog.style.display = "block"; }
 
   if (cookiesAcception && cookiesAcception == "yes") cookiesAlertBanner.style.display = "none";
   else cookiesAlertBanner.style.display = "block"
-  
+
   // Display cheat sheet for first visit
   if (!alreadyVisitedCookie) {
     cheatsSheet.style.display = "block";
@@ -52,7 +57,7 @@ window.onload = () => {
     if (texts.length >= 1) {
       defaultEditor.innerText = texts[0];
     }
-    
+
     if (texts.length > 1) {
       for (let i = 1; i < texts.length; i++) {
         let newEditor = uiActions.addTab();
