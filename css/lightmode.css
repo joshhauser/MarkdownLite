@@ -351,8 +351,7 @@ input[type="text"] {
   cursor: pointer;
 }
 
-.tab .tablink:not(.activeTab):active, 
-.tab #new-tab-btn:active,
+.tab .tablink:not(.activeTab):active,
 .tab .tablink.activeTab {
   box-shadow: 
   inset 3px 3px 6px #4b505acd,

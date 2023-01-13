@@ -10,7 +10,8 @@ const markdownTags = ["#", "##", "###", "####", "#####", "######", "-"]
  * @param {String} text the text to parse
  */
 function parse(text){
-  let lines = text.split("\n");
+  let lines = text.split(/(\n\n|\n)/);
+  console.log(lines)
   let newText = "";
 
   lines.forEach(line => {
@@ -52,8 +53,11 @@ function parse(text){
           break;
       }
     }
-    else if (line !== '\n' && line !== '\n\n') {
+    else if (line !== '\n' && line !== '\n\n' && line !== '') {
       newText += line + "<br>";
+    }
+    else if (line === '\n\n') {
+      newText += "<br>";
     }
   });
 

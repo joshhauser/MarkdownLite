@@ -2,6 +2,7 @@ import * as utils from './utils.js';
 import * as uiActions from './uiActions.js';
 import * as parseActions from './parser.js';
 import TabLinkButton from './TabButton.js';
+import { testAddTabs } from '../tests/TabTests.js';
 
 window.onload = () => {
   // "editors" div
@@ -28,6 +29,8 @@ window.onload = () => {
   let defaultTabLink = document.getElementsByClassName("tablink")[0];
 
   uiActions.tabLinkButtons.push(new TabLinkButton(1, defaultTabLink));
+
+  document.getElementById("new-tab-btn").oncontextmenu = (event) => event.preventDefault();
 
   // Add event listener for "load" button
   document.getElementById("load").addEventListener("click", () => {
@@ -89,7 +92,7 @@ window.onload = () => {
     parseActions.parse(text);
     // Save text as a cookie at each input (temporary)
 
-    let timeout = setTimeout(() => utils.setTextCookie(defaultEditor, 1), 3000)
+    timeout = setTimeout(() => utils.setTextCookie(defaultEditor, 1), 3000)
   });
 
 
@@ -119,4 +122,6 @@ window.onload = () => {
       if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
     }
   });
+
+  testAddTabs(5);
 }

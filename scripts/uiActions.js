@@ -4,7 +4,8 @@ import TabLinkButton from './TabButton.js';
 
 let tabsCount = 1;
 let tabLinkButtons = [];
-let currentTabIndex = 1;
+let tabViewsDiv = [];
+let currentTabId = 1;
 let timeouts = [];
 
 /**
@@ -30,7 +31,6 @@ function displayAboutThis() {
  * @param {boolean} active is true if nightmode should be activated
  */
 function setNightmode(active) {
-  console.log(active)
   let htmlPage = document.getElementsByTagName("html")[0];
   if (active) htmlPage.classList.add("darkmode");
   else htmlPage.classList.remove("darkmode");
@@ -45,7 +45,8 @@ function setNightmode(active) {
  */
 function addTab() {
   tabsCount++;
-  currentTabIndex = tabsCount;
+  currentTabId = tabsCount;
+  let newTabIndex = tabLinkButtons[tabLinkButtons.length - 1].id + 1;
   let tabLinks = document.getElementsByClassName("tab")[0];
   let tabViews = document.getElementById("tabViews");
   let newTabBtn = document.getElementById("new-tab-btn");
@@ -59,7 +60,7 @@ function addTab() {
 
   let newTabLink = document.createElement("button");
   newTabLink.classList.add("tablink","activeTab");
-  newTabLink.innerText = tabsCount;
+  newTabLink.innerText = newTabIndex;
   newTabLink.onclick = setTab.bind(newTabLink, [newTabLink.innerText]);
   newTabLink.oncontextmenu = (event) => { 
     event.preventDefault();
@@ -67,7 +68,9 @@ function addTab() {
   newTabLink.onmousedown = (event) => {
     if (event.button == 2) deleteTab(newTabLink.innerText);
   }
-  tabLinkButtons.push(new TabLinkButton(tabsCount, newTabLink));
+
+  let newTabLinkBtn = new TabLinkButton(newTabIndex, newTabLink);
+  tabLinkButtons.push(newTabLinkBtn);
 
   // Add new tab link
   tabLinks.appendChild(newTabLink);
@@ -88,8 +91,8 @@ function addTab() {
 
   wysiwygEditor.addEventListener("input", () => {
     parseActions.parse(wysiwygEditor.innerText);
-    let timeout = setTimeout(() => utils.setTextCookie(wysiwygEditor, currentTabIndex), 3000)
-    if (timeouts.length == tabsCount) timeouts[currentTabIndex - 1] = timeout
+    let timeout = setTimeout(() => utils.setTextCookie(wysiwygEditor, newTabIndex), 3000)
+    if (timeouts.length == tabsCount) timeouts[newTabIndex - 1] = timeout
     else timeouts.push(timeout);
   });
 
@@ -111,7 +114,19 @@ function addTab() {
  * @param {Number} tabIndex the index of the tab to set
  * as current tab 
  */
-function setTab(tabIndex) {
+function setTab(tabId) {
+  let _tabId = null;
+
+  if (typeof tabId === "string") {
+    _tabId = Number(tabId);
+  }
+  else if (typeof tabId === "object") {
+    _tabId = Number(tabId[0]);
+  }
+  else {
+    _tabId = tabId;
+  }
+
   let activeTabLink = document.getElementsByClassName("activeTab");
   if (activeTabLink.length != 0) {
     activeTabLink[0].classList.remove("activeTab");
@@ -119,34 +134,46 @@ function setTab(tabIndex) {
     activeTabView[0].classList.remove("activeTabView");
   }
 
-  currentTabIndex = tabIndex;
+  const tabLinkButtonIndex = tabLinkButtons.findIndex(btn => btn.id === _tabId);
+  const tabViews = document.getElementsByClassName("tabContent");
+  console.log(_tabId)
 
-  let tabLinks = document.getElementsByClassName("tablink");
-  let tabViews = document.getElementsByClassName("tabContent");
-
-  tabLinks[tabIndex - 1].classList.add("activeTab");
-  tabViews[tabIndex - 1].classList.add("activeTabView");
+  tabLinkButtons[tabLinkButtonIndex].htmlElement.classList.add("activeTab");
+  tabViews[tabLinkButtonIndex].classList.add("activeTabView");
+  currentTabId = tabLinkButtons[tabLinkButtonIndex].id;
 }
 
 /**
  * Delete the given tab
  * @param {Number} tabIndex the index of the tab to delete
  */
-function deleteTab(tabIndex) {
-  console.log(tabIndex)
+function deleteTab(tabId) {
   if (tabsCount === 1) return;
-  let _tabIndex = Number(tabIndex); 
+  let _tabId = Number(tabId); 
+  const isActive = isTabActive(_tabId);
 
-  let indexOfTabLink = tabLinkButtons.findIndex(btn => btn.id === _tabIndex);
+  let indexOfTabLink = tabLinkButtons.findIndex(btn => btn.id === _tabId);
   tabLinkButtons[indexOfTabLink].htmlElement.remove();
   tabLinkButtons.splice(indexOfTabLink, 1);
-  console.log(tabLinkButtons)
   let tabViews = document.getElementsByClassName("tabContent");
   tabViews[indexOfTabLink].remove();
 
-  if (indexOfTabLink > 0) setTab(indexOfTabLink);
-  if (indexOfTabLink == 0) setTab(1);
+  if (isActive) {
+    if (indexOfTabLink > 0) setTab(tabLinkButtons[indexOfTabLink - 1].id);
+    else setTab(tabLinkButtons[indexOfTabLink].id);
+  }
+
   tabsCount--;
+}
+
+/**
+ * Check if the tab with the given id is active or not
+ * @param {Number} tabId the id of the tab to check for active status
+ * @returns true if tab with tabId is active, otherwise false
+ */
+function isTabActive(tabId) {
+  const tabLinkBtn = tabLinkButtons.find(btn => btn.id === tabId);
+  return tabLinkBtn.htmlElement.classList.contains("activeTab");
 }
 
 export {

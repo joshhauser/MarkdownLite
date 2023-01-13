@@ -212,6 +212,14 @@ function getCurrentDisplay() {
   return currentDisplay[0] || null;
 }
 
+/**
+ * Print errors
+ * @param {String} errMsg the message that explains the error
+ */
+function error(errMsg) {
+  console.error(errMsg);
+}
+
 export {
   removeMdTags,
   getCookie,
@@ -223,5 +231,6 @@ export {
   resetCookie,
   getTextsCookies,
   getCurrentDisplay,
-  getCurrentEditor
+  getCurrentEditor,
+  error
 };
