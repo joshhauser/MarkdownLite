@@ -122,6 +122,4 @@ window.onload = () => {
       if (window.getComputedStyle(aboutThis).display == "block") aboutThis.style.display = "none";
     }
   });
-
-  testAddTabs(5);
 }
