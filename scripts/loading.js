@@ -21,7 +21,7 @@ window.onload = () => {
   let cookiesAlertBanner = document.getElementById("cookies-alert");
   // Cookie "first visit"
   let alreadyVisitedCookie = utils.getCookie("alreadyVisited");
-  // Night mode cookie
+  // Night mode cookie   
   let nightmodeCookie = utils.getCookie("nightmode");
   // "Cookies acceptation" cookie
   let cookiesAcception = utils.getCookie("acceptCookies");
@@ -30,7 +30,7 @@ window.onload = () => {
 
   uiActions.tabLinkButtons.push(new TabLinkButton(1, defaultTabLink));
 
-  document.getElementById("new-tab-btn").oncontextmenu = (event) => event.preventDefault();
+  document.oncontextmenu = (event) => event.preventDefault();
 
   // Add event listener for "load" button
   document.getElementById("load").addEventListener("click", () => {

@@ -62,9 +62,6 @@ function addTab() {
   newTabLink.classList.add("tablink","activeTab");
   newTabLink.innerText = newTabIndex;
   newTabLink.onclick = setTab.bind(newTabLink, [newTabLink.innerText]);
-  newTabLink.oncontextmenu = (event) => { 
-    event.preventDefault();
-  }
   newTabLink.onmousedown = (event) => {
     if (event.button == 2) deleteTab(newTabLink.innerText);
   }
