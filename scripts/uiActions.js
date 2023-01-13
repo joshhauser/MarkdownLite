@@ -111,7 +111,7 @@ function addTab() {
 
 /**
  * Change the current tab
- * @param {Number} tabIndex the index of the tab to set
+ * @param {Number} tabId the id of the tab to set
  * as current tab 
  */
 function setTab(tabId) {
@@ -136,7 +136,6 @@ function setTab(tabId) {
 
   const tabLinkButtonIndex = tabLinkButtons.findIndex(btn => btn.id === _tabId);
   const tabViews = document.getElementsByClassName("tabContent");
-  console.log(_tabId)
 
   tabLinkButtons[tabLinkButtonIndex].htmlElement.classList.add("activeTab");
   tabViews[tabLinkButtonIndex].classList.add("activeTabView");
